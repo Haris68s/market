@@ -461,6 +461,17 @@ pause selama aplikasinya dipakai.
 
 ### Langkah deployment (contoh Render)
 
+> **Catatan penting soal GitHub:** GitHub (dan GitHub Pages) **hanya bisa menyajikan file
+> statis** (HTML/CSS/JS). GitHub Pages **tidak bisa** menjalankan Node.js/Express dan
+> **tidak bisa** terhubung ke database. Jadi:
+> - **GitHub** = tempat menyimpan kodemu (backup + sumber deploy).
+> - **Render** = tempat aplikasinya *jalan* (server + API + frontend sekaligus).
+> - **MongoDB Atlas** = tempat datanya *tinggal* (selalu nyala 24/7).
+>
+> Frontend + backend sebaiknya di-host **bersama** di Render (satu URL). Kalau dipisah
+> (frontend di GitHub Pages, backend di Render), kamu perlu mengatur API base URL, CORS, dan
+> cookie `SameSite=None; Secure` — repot untuk tugas sekolah.
+
 1. Push kode ke GitHub.
 2. Render → *New Web Service* → pilih repo → Environment: **Node**.
 3. Build command: `npm install && npm run icons`
