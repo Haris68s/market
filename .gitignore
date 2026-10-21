@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+
+# package-lock.json sengaja ikut di-commit agar dependensi versi yang sama
+# bisa dipakai semua orang (instalasi lebih konsisten).
+
+# Environment (JANGAN pernah di-commit!)
+.env
+.env.local
+.env.*.local
+
+# Gambar yang diunggah saat development
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Log
+logs/
+*.log
+npm-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Editor & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+build/
+*.tgz
