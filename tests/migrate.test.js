@@ -8,7 +8,6 @@
 
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const mongoose = require('mongoose');
 const { MongoClient } = require('mongodb');
 
 const { setupDatabase, teardownDatabase, clearDatabase } = require('./helpers/db');
@@ -23,7 +22,11 @@ test.before(async () => {
   await setupDatabase();
   app = require('../src/app');
 
-  client = new MongoClient(mongoose.connection.getClient().url || process.env.MONGODB_URI);
+  // Pakai URI yang sama dengan yang dipakai helper db (dijamin terisi).
+  const uri = process.env.MONGODB_URI;
+  assert.ok(uri, 'MONGODB_URI harus terisi oleh helper db');
+
+  client = new MongoClient(uri);
   await client.connect();
   sourceDb = client.db('uji_migrasi_sumber');
   targetDb = client.db('uji_migrasi_target');
