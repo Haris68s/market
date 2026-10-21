@@ -558,17 +558,21 @@ Semua prefix `/api`. Format respons seragam:
 | # | Keputusan | Status | Alasan |
 |---|---|---|---|
 | D1 | Identitas login = **nomor WhatsApp** | ✅ Disetujui (user) | Sesuai konteks "TokoSiswa": WA adalah kontak utama siswa. Email jadi opsional, bukan identitas. |
-| D2 | Hash password = **bcryptjs** (cost 12) | ✅ Dipilih | Pure-JS, tidak butuh kompilasi native → grievance install di laptop siswa. |
+| D2 | Hash password = **bcryptjs** (cost 12) | ✅ Dipilih | Pure-JS, tidak butuh kompilasi native → memudahkan instalasi di laptop siswa. |
 | D3 | Autentikasi = **server-side session + cookie HttpOnly** | ✅ Dipilih | JWT di localStorage rentan XSS. Cookie HttpOnly tidak bisa dibaca JS. |
-| D4 | Penyimpanan gambar = **Cloudinary** (upload signed via backend) | ⏳ Menunggu konfirmasi | Alternatif cadangan: imgbb / UploadThing. Perlu ditanyakan ke user. |
+| D4 | Penyimpanan gambar = **Cloudinary** (upload signed via backend) | ✅ Dipilih + cadangan lokal | `src/services/image.service.js` mendukung dua provider lewat satu variabel `IMAGE_PROVIDER`. Cloudinary = produksi (25 credit/bulan, resize + WebP otomatis), `local` = development tanpa internet. Rahasia API tidak pernah masuk frontend. |
 | D5 | 1 toko = 1 penjual (MVP) | ✅ Dipilih | Menjaga scoping & keamanan sederhana (Anti-IDOR per `storeId` tetap wajib). |
 | D6 | Transaksi "pembelian" **tidak** otomatis jadi pemasukan | ✅ Dipilih | Sesuai spec; hanya dicatat setelah penjual mengonfirmasi. |
 | D7 | Ulasan **wajib** berasal dari pesanan berstatus *selesai* | ✅ Dipilih | Menekan rating palsu tanpa sistem verifikasi pembayaran. |
 | D8 | alamat toko **tidak** otomatis ditampilkan | ✅ Dipilih | Field `location.showExactAddress` default `false` → hanya kota yang tampil. |
 | D9 | Super admin dibuat via **script setup backend** | ✅ Dipilih | Tidak bisa didaftarkan dari UI publik. |
+| D10 | Minimum **3 ulasan + rating 4+** untuk daftar "Rating Tertinggi" | ✅ Dipilih | Mencegah 1 ulasan bintang 5 mendominasi beranda. Bisa diubah admin lewat dashboard. |
+| D11 |Reset password = **verifikasi admin via WhatsApp + token sekali pakai (SHA-256, 30 menit)** | ✅ Dipilih | Tidak ada email, jadi verifikasi manual satu-satunya opsi yang realistis & aman. |
+| D12 | `sanitizeFilter` Mongoose **tidak** dipakai | ✅ Dipilih | Opsi tersebut membungkus `$regex` jadi `$eq` sehingga pencarian rusak. Proteksi NoSQL injection berasal dari validasi Zod + filter yang dibangun di service + `escapeRegex()`. |
+| D13 | Grafik memakai **Chart.js dimuat lazy dari CDN** | ✅ Dipilih | Ringan & mudah. Halaman tanpa grafik tetap tidak memuatnya. Ikon tetap lokal (tanpa CDN). |
 
-### Keputusan yang masih perlu konfirmasi (satu per satu)
-1. **D4 — layanan gambar**: Cloudinary (kuota 25 credit/bulan, optimasi WebP) vs imgbb (kuota besar, optimasi lebih terbatas) vs UploadThing (developer menyertakan storage di provider).
-2. **Reset password**: alur admin-verifikasi-lewat-WA (sudah ditulis di §4.1) sudah cukup, atau perlu versi otomatis?
-3. **Minimum ulasan** untuk masuk daftar "Rating Tertinggi" di beranda: saya sarankan **≥ 3 ulasan** + rating ≥ 4.0.
+### Hasil implementasi (lihat `Laporan-Implementasi-dan-Pengujian.md`)
+- 115 pengujian otomatis, semuanya lulus.
+- 10 koleksi MongoDB, ~50 endpoint API, 23 halaman HTML.
+- 10 bug nyata ditemukan lewat pengujian & dijaga ulang oleh tes (lihat tabel pada laporan).
 
