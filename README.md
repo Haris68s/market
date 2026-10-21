@@ -394,20 +394,70 @@ Toko menyimpan **kota/area** dan **kelas atau lokasi di sekolah** (mis. "Kelas X
 
 ## Deployment
 
-### Opsi hosting gratis (backend + database)
+### Apakah database bisa nyala 24/7 tanpa bayar? — YA
 
-| Platform | Database | Catatan |
+**MongoDB Atlas M0 (Free) berjalan 24 jam nonstop.** Yang perlu kamu tahu:
+
+| Batas M0 | Nilai | Arti buat proyek sekolah |
 |---|---|---|
-| **Render** (Web Service) | MongoDB Atlas M0 | Ada free tier web service (512 MB RAM, build 15 menit). Bundle Node harus versi 18+. |
-| **Railway** | MongoDB Atlas M0 | Ada trial gratis, kuota pemakaian terbatas. |
-| **Koyeb / Fly.io** | MongoDB Atlas M0 | Free tier kecil, cold start bisa lambat. |
+| Harga | **$0 selamanya** | Tidak ada tagihan, tidak perlu kartu kredit |
+| Penyimpanan | **512 MB** (absolut, bukan per bulan) | Cukup untuk ribuan produk + ulasan |
+| RAM / vCPU | Shared | Dipakai bersama pengguna lain |
+| Koneksi | **500** bersamaan | Aplikasi kita hanya pakai ~2 koneksi |
+| Operasi | **100 operasi/detik** | Jauh di atas kebutuhan 50 siswa |
+| Database / collection | 100 / 500 | Koleksi kita ada 10 |
+| Transfer data | 10 GB masuk + 10 GB keluar per 7 hari | Cukup untuk gambar & teks |
+| Backup otomatis | **Tidak ada** | Ekspor manual (`mongodump`) secara berkala |
 
-> **Batas paket gratis (perkiraan 2026, bisa berubah):**
-> - Atlas M0: 512 MB penyimpanan, satu cluster *shared*, tidak ada backup otomatis.
-> - Free tier hosting biasanya punya ** batas memori, waktu build, dan bisa "tidur"
->   (cold start)** sehingga halaman pertama lebih lambat.
-> - **Verifikasi lagi batasannya di situs masing-masing sebelum memilih platform.**
->   Jangan menjanjikan hosting gratis tanpa batas.
+**Soal "nyala terus":** Atlas **meng-auto-pause cluster M0 setelah 30 hari tanpa koneksi
+sama sekali**, lalu **langsung hidup lagi** begitu ada koneksi baru. Karena aplikasi kita
+selalu terhubung ke database (Mongoose + `connect-mongo`), cluster praktis tidak akan pernah
+pause selama aplikasinya dipakai.
+
+> **Jadi: database-mu tetap hidup 24/7. Yang bisa "tidur" adalah server aplikasinya.**
+
+### Opsi hosting gratis (server aplikasi)
+
+| Platform | Status free tier (per Oktober 2026) | Sifat |
+|---|---|---|
+| **Render** (Web Service) | 750 jam instans/bulan, RAM 512 MB, **tidur setelah 15 menit idle**, cold start ±1 menit | Paling gampang setup |
+| **Koyeb** | Free tier tersedia, scale-to-zero | Cold start mirip Render |
+| **Railway** | **Free tier sudah dihapus** (2023) — hanya kredit trial $5 sekali pakai | Tidak gratis lagi |
+| **Fly.io** | **Tidak ada free tier** untuk pengguna baru | Butuh kartu kredit |
+| **Oracle Cloud Always Free** | VM **2 OCPU / 12 GB RAM** (Arm) + 200 GB storage, seumur hidup akun | Benar-benar 24/7, tapi harus pasang sendiri |
+
+### Rekomendasi untuk proyek SMK
+
+**Paling mudah & cukup (pilihan utama):**
+> **MongoDB Atlas M0** (database, gratis 24/7) + **Render free web service** (aplikasi).
+> Kekurangannya: server tidur setelah 15 menit tidak ada yang membukanya. **Saat presentasi,
+> buka linknya 1–2 menit lebih awal** supaya sempat "wake up".
+
+**Kalau mau benar-benar 24/7 tanpa cold start:**
+> **Oracle Cloud Always Free** — pasang sendiri MongoDB + Node.js + Nginx + Let's Encrypt di
+> satu VM. Gratis seumur hidup akun, tidak tidur. Tapi: perlu kartu kredit untuk verifikasi
+> (tidak ada biaya selama di bawah batas), sering kena error *"Out of capacity"* saat membuat
+> VM, dan setup-nya jauh lebih repot. **Disarankan hanya kalau kamu sudah nyaman pakai
+> terminal Linux.**
+
+> ⚠️ **Tidak ada hosting gratis tanpa batas.** Semua platform di atas punya kuota, batas
+> memori, dan/atau aturan tidur. Cek ulang batasannya di situs masing-masing sebelum memilih
+> platform — aturan free tier sering berubah.
+
+### Tips khusus untuk aplikasi ini
+
+- **Session aman walau server tidur.** Session disimpan di collection `sessions` di MongoDB
+  (bukan di memory), jadi walaupun Render tidur server, pengguna **tetap login** dan tidak
+  perlu login ulang.
+- **Session lama terhapus otomatis.** `connect-mongo` membuat TTL index, jadi session yang
+  kadaluarsa dibersihkan sendiri oleh database.
+- **Koneksi database tetap terbuka** → cluster Atlas M0 tidak akan ke-pause selama app dipakai.
+- **Kuota koneksi aman.** `src/config/db.js` memakai `maxPoolSize: 10`, jauh di bawah batas
+  500 koneksi milik M0.
+- **Backup manual wajib.** M0 tidak punya backup otomatis. Ekspor sesekali dari Atlas
+  (Clusters → *Download Database* / `mongodump`) supaya data tugas sekolahmu aman.
+- Kalau data sudah mendekati 512 MB, arsipkan `activity_logs` dan `sessions` — keduanya
+  aman dihapus tanpa mengganggu data utama.
 
 ### Langkah deployment (contoh Render)
 
