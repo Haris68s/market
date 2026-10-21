@@ -104,6 +104,58 @@ npm run dev
 
 ---
 
+## Database yang dipakai: MongoDB Atlas (bukan lokal)
+
+Aplikasi ini **langsung memakai MongoDB Atlas**. Tidak ada lagi MongoDB lokal yang
+dibutuhkan untuk menjalankan aplikasi.
+
+| | |
+|---|---|
+| Connection string | `MONGODB_URI` di file `.env` |
+| Nama database | `MONGODB_DB_NAME` (default `kantinsiswa`) |
+| Cek koneksi | `npm run check-db` |
+| Isi data contoh | `npm run seed` |
+
+### ⚠️ Jangan pernah menaruh kredensial asli di `.env.example`
+
+`.env.example` **ikut ter-commit** ke GitHub. Kalau password Atlas asli ditaruh di sana,
+akun database kamu **bocor ke publik**. Isi `.env.example` hanya dengan placeholder:
+
+```
+MONGODB_URI=mongodb+srv://<username>:<db_password>@cluster0.mongodb.net/
+```
+
+Untuk memastikan tidak ada kebocoran, jalankan:
+
+```bash
+npm run check-secrets
+```
+
+Skrip ini membandingkan nilai sensitif di `.env` dengan semua file yang ter-commit
+(password di dalam connection string ikut dicek secara terpisah). Jalankan sebelum
+`git add`/`git push`. Otomatis juga berjalan sebelum `npm test`.
+
+> **Catatan:** `MONGODB_URI` untuk Atlas biasanya tidak menyebut nama database di
+> connection string-nya. Karena itu aplikasi selalu mengetaikan `MONGODB_DB_NAME`
+> secara eksplisit (untuk Mongoose **dan** untuk session store), supaya data tidak
+> nyasar ke database `test`.
+
+Kalau kamu punya MongoDB lokal yang datanya mau dipindah ke Atlas, pakai
+[skrip migrasi](#memindahkan-data-dari-mongodb-lokal-ke-atlas).
+
+### Kalau koneksi gagal
+
+`npm run check-db` memberi diagnosis yang spesifik:
+
+| Gejala | Penyebab & solusi |
+|---|---|
+| `bad auth : authentication failed` | Username/password salah, atau password masih `<db_password>` |
+| `timed out` | IP Address belum diizinkan → Atlas → Network Access → `0.0.0.0/0` |
+| `ENOTFOUND` | Hostname cluster salah di `MONGODB_URI` |
+| Password gagal | Karakter khusus harus di-encode: `rahasia@123` → `rahasia%40123` |
+
+---
+
 ## Membuat Database MongoDB Atlas
 
 1. Daftar di https://www.mongodb.com/atlas (paket **M0 Free**).
@@ -227,16 +279,22 @@ pakai skrip migrasi yang sudah disiapkan. **Tidak perlu `mongodump`/`mongorestor
 
 ### Cara pakai
 
+Sumber **wajib** diisi eksplisit (tidak ada lagi default ke localhost).
+
 ```bash
 # 1. Isi MONGODB_URI di .env dengan connection string Atlas kamu.
 #    (JANGAN lupa ganti bagian passwordnya, bukan "<db_password>".)
 
 # 2. Lihat dulu rencana migrasi tanpa mengubah apa pun
-npm run migrate -- --dry-run
+npm run migrate -- --source="mongodb://127.0.0.1:27017" --dry-run
 
 # 3. Kalau sudah yakin, jalankan migrasinya
-npm run migrate
+npm run migrate -- --source="mongodb://127.0.0.1:27017"
 ```
+
+> `--source` menunjuk ke **database asal** (mis. MongoDB lokal lama),
+> sedangkan **target** diambil dari `MONGODB_URI` di `.env` (Atlas).
+> Kalau sumber dan target sama, skrip berhenti dengan pesan error.
 
 ### Opsi yang tersedia
 

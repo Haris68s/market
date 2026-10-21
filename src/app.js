@@ -77,8 +77,11 @@ app.use(cookieParser());
 
 /* ----------------------------- Session ----------------------------- */
 // connect-mongo membuat koneksi sendiri ke MongoDB (dipakai untuk menyimpan session).
+// dbName wajib diisi karena connection string Atlas biasanya tidak menyebut nama database
+// (kalau tidak, session akan tersimpan di database "test").
 const sessionStore = new MongoStore({
   mongoUrl: env.mongodbUri,
+  dbName: env.dbName,
   collectionName: 'sessions',
   ttl: Math.floor(env.session.maxAgeMs / 1000),
   touchAfter: 24 * 3600,

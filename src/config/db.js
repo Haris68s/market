@@ -25,6 +25,49 @@ mongoose.set('strictQuery', true);
  * 3. String pencarian di-escape dengan escapeRegex() sebelum dipakai sebagai $regex.
  */
 let connectingPromise = null;
+
+/**
+ * Memberi pesan yang jelas kalau koneksi gagal.
+ * Masalah database Atlas sering dikira "server mati", padahal penyebabnya
+ * biasanya password atau IP Access yang belum benar.
+ */
+function logKoneksiGagal(err) {
+  const pesan = err.message || String(err);
+  // eslint-disable-next-line no-console
+  console.error('\n[db] Gagal terhubung ke MongoDB\n');
+  // eslint-disable-next-line no-console
+  console.error('  Pesan  :', pesan);
+
+  if (/auth/i.test(pesan)) {
+    // eslint-disable-next-line no-console
+    console.error('\n  Kemungkinan penyebab:');
+    // eslint-disable-next-line no-console
+    console.error('  1. Password di MONGODB_URI masih placeholder, misalnya "<db_password>".');
+    // eslint-disable-next-line no-console
+    console.error('     Ganti dengan password asli dari Atlas > Database Access > Database Users.');
+    // eslint-disable-next-line no-console
+    console.error('  2. Username salah atau belum dibuat.');
+    // eslint-disable-next-line no-console
+    console.error('  3. Password mengandung karakter khusus (@, :, /, ?, #) yang belum di-encode.');
+    // eslint-disable-next-line no-console
+    console.error('     Contoh: password "rahasia@123" jadi "rahasia%40123".');
+  } else if (/getaddrinfo|ENOTFOUND/i.test(pesan)) {
+    // eslint-disable-next-line no-console
+    console.error('\n  Kemungkinan penyebab: hostname cluster salah di MONGODB_URI.');
+  } else if (/timed out|timeout|network/i.test(pesan)) {
+    // eslint-disable-next-line no-console
+    console.error('\n  Kemungkinan penyebab:');
+    // eslint-disable-next-line no-console
+    console.error('  1. IP Address belum diizinkan di Atlas > Network Access.');
+    // eslint-disable-next-line no-console
+    console.error('     Tambahkan 0.0.0.0/0 (Allow access from anywhere).');
+    // eslint-disable-next-line no-console
+    console.error('  2. Koneksi internet bermasalah.');
+  }
+
+  // eslint-disable-next-line no-console
+  console.error('');
+}
 async function connectDatabase() {
   if (mongoose.connection.readyState === 1) return mongoose.connection;
 
@@ -43,8 +86,7 @@ async function connectDatabase() {
       })
       .catch((err) => {
         connectingPromise = null;
-        // eslint-disable-next-line no-console
-        console.error('[db] Gagal terhubung ke MongoDB:', err.message);
+        logKoneksiGagal(err);
         throw err;
       });
   }

@@ -12,7 +12,10 @@
     "seed": "node scripts/seed.js",
     "create-admin": "node scripts/create-admin.js",
     "migrate": "node scripts/migrate-to-atlas.js",
-    "setup": "npm run icons && npm run seed"
+    "check-db": "node scripts/check-db.js",
+    "setup": "npm run icons && npm run seed",
+    "check-secrets": "node scripts/check-secrets.js",
+    "pretest": "node scripts/check-secrets.js"
   },
   "keywords": [
     "marketplace",

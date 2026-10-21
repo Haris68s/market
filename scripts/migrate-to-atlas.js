@@ -169,7 +169,9 @@ async function confirm(question) {
 async function main() {
   const args = parseArgs(process.argv.slice(2));
 
-  const sourceUri = args.source || process.env.MIGRATE_SOURCE_URI || 'mongodb://127.0.0.1:27017';
+  // Sumber WAJIB diisi eksplisit (tidak ada default localhost lagi),
+  // supaya tidak ada migrasi yang diam-diam memakai database lokal.
+  const sourceUri = args.source || process.env.MIGRATE_SOURCE_URI || '';
   const sourceDbName = args.sourceDb || process.env.MIGRATE_SOURCE_DB || 'kantinsiswa';
   const targetUri = args.target || process.env.MIGRATE_TARGET_URI || process.env.MONGODB_URI || '';
   const targetDbName = args.targetDb || process.env.MIGRATE_TARGET_DB || process.env.MONGODB_DB_NAME || 'kantinsiswa';
@@ -177,6 +179,14 @@ async function main() {
   console.log('\n=== Migrasi Data MongoDB ===\n');
   console.log(`  Sumber : ${maskUri(sourceUri)} / ${sourceDbName}`);
   console.log(`  Target : ${targetUri ? `${maskUri(targetUri)} / ${targetDbName}` : '(belum diisi)'}`);
+
+  if (!sourceUri) {
+    console.error('\n[ERROR] URI sumber belum diisi.');
+    console.error('Tentukan sumber migrasi secara eksplisit, contoh:');
+    console.error('  node scripts/migrate-to-atlas.js --source="mongodb+srv://user:pass@cluster-a.mongodb.net" \\');
+    console.error('                            --target="mongodb+srv://user:pass@cluster-b.mongodb.net"\n');
+    process.exit(1);
+  }
 
   if (!targetUri) {
     console.error('\n[ERROR] URI target belum diisi.');
