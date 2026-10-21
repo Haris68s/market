@@ -38,7 +38,7 @@
         }).join('') +
         '</ul>' +
         '<div class="mt-5"><a class="btn btn-outline btn-sm btn-block" href="/" target="_blank">' +
-        UI.icon('external-link', 'icon icon-sm') + ' Lihat halaman publik</a></div>';
+        UI.icon('external-link', 'icon-sm') + ' Lihat halaman publik</a></div>';
     }
   }
 

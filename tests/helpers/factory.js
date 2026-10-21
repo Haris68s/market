@@ -122,7 +122,6 @@ async function createReview(product, store, buyer, { rating = 5, comment = 'Ulas
     rating,
     comment,
     status,
-    isVerifiedPurchase: false,
   });
 
   // Perbarui cache rating seperti yang dilakukan service di aplikasi.

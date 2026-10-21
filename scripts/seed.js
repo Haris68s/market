@@ -173,13 +173,20 @@ async function main() {
   if (orders.length === 0) {
     const firstStore = await Store.findOne({});
     const products = await Product.find({ storeId: firstStore._id });
-    const buyer = await User.create({
-      role: 'seller',
-      name: 'Pembeli Demo',
-      whatsapp: normalizeWhatsapp('081399988877'),
-      passwordHash: await hashPassword('Siswa12345'),
-      status: 'active',
-    });
+
+    // Akun pembeli demo: pakai yang sudah ada kalau pernah di-seed sebelumnya,
+    // supaya `npm run seed` bisa dijalankan berulang tanpa error.
+    const buyerWa = normalizeWhatsapp('081399988877');
+    let buyer = await User.findOne({ whatsapp: buyerWa });
+    if (!buyer) {
+      buyer = await User.create({
+        role: 'seller',
+        name: 'Pembeli Demo',
+        whatsapp: buyerWa,
+        passwordHash: await hashPassword('Siswa12345'),
+        status: 'active',
+      });
+    }
 
     const sampleOrders = [];
     for (let i = 0; i < products.length; i += 1) {
@@ -215,11 +222,19 @@ async function main() {
         rating: 5,
         comment: 'Barang sesuai deskripsi, pengirimannya cepat. Recommended!',
         status: 'published',
-        isVerifiedPurchase: false,
       });
 
       // eslint-disable-next-line no-await-in-loop
       await Product.updateOne({ _id: product._id }, { $inc: { soldCount: qty } });
+
+      // Perbarui cache rating produk & toko (dikerjakan service saat ulasan
+      // dibuat lewat aplikasi, jadi di seed harus dipanggil manual).
+      // eslint-disable-next-line global-require
+      const productService = require('../src/services/product.service');
+      // eslint-disable-next-line no-await-in-loop
+      await productService.refreshProductRating(product._id);
+      // eslint-disable-next-line no-await-in-loop
+      await productService.refreshStoreRating(firstStore._id);
     }
 
     await Store.updateOne({ _id: firstStore._id }, { $set: { totalSold: sampleOrders.length } });

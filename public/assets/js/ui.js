@@ -50,8 +50,13 @@
 
   /* ------------------------------- Ikon ------------------------------- */
 
+  /**
+   * Buat markup ikon SVG.
+   * Class dasar "icon" SELALU ditambahkan, class tambahan hanya melengkapi.
+   * (Kalau class dasar diganti, aturan CSS seperti position:absolute ikut hilang.)
+   */
   function icon(name, className) {
-    var cls = className || 'icon';
+    var cls = 'icon' + (className ? ' ' + className : '');
     return (
       '<svg class="' + cls + '" aria-hidden="true" focusable="false">' +
       '<use href="/assets/icons/sprite.svg#' + name + '"></use></svg>'
@@ -312,7 +317,7 @@
         '<button class="user-chip" id="user-chip" aria-haspopup="true" aria-expanded="false">' +
         '<span class="avatar">' + escapeHtml(initial) + '</span>' +
         '<span class="user-name">' + escapeHtml(session.user.name) + '</span>' +
-        icon('chevron-down', 'icon icon-sm') +
+        icon('chevron-down', 'icon-sm') +
         '</button>' +
         '<div class="dropdown" id="user-dropdown" hidden>' +
         '<a href="' + dashboardHref + '">' + icon('layout-dashboard', 'icon-sm') + dashboardLabel + '</a>' +

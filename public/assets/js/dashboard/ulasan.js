@@ -55,9 +55,6 @@
           '<div class="tiny muted">' + UI.formatDateTime(r.createdAt) + '</div></div>' +
           UI.stars(r.rating) +
           badge +
-          (r.isVerifiedPurchase
-            ? '<span class="badge badge-info">Terverifikasi</span>'
-            : '<span class="badge badge-outline">Belum terverifikasi</span>') +
           '</div>' +
           '<p>' + UI.escapeHtml(r.comment) + '</p>' +
           '<div class="tiny muted">Produk: ' +

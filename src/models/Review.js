@@ -26,8 +26,10 @@ const reviewSchema = new mongoose.Schema(
       default: 'published',
       index: true,
     },
-    // Transaksi lewat WhatsApp tidak bisa diverifikasi otomatis => tandai belum terverifikasi.
-    isVerifiedPurchase: { type: Boolean, default: false },
+    // CATATAN: dulu ada flag "isVerifiedPurchase". Fitur itu dihapus karena
+    // transaksi dilakukan lewat WhatsApp sehingga tidak ada sumber pembayaran
+    // yang bisa diverifikasi secara otomatis. Menampilkan label "terverifikasi"
+    // hanya akan menimbulkan kesan palsu.
 
     moderation: {
       hiddenBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: null },

@@ -105,7 +105,7 @@
       .map(function (c) {
         return '<span class="active-filter">' + UI.escapeHtml(c.label) +
           '<button type="button" data-clear="' + c.key + '" aria-label="Hapus filter">' +
-          UI.icon('x', 'icon icon-sm') + '</button></span>';
+          UI.icon('x', 'icon-sm') + '</button></span>';
       })
       .join('');
 
@@ -129,7 +129,7 @@
     }
 
     var html = '<button type="button" data-page="' + (p.page - 1) + '"' + (p.hasPrev ? '' : ' disabled') + ' aria-label="Halaman sebelumnya">' +
-      UI.icon('chevron-left', 'icon icon-sm') + '</button>';
+      UI.icon('chevron-left', 'icon-sm') + '</button>';
 
     var start = Math.max(1, p.page - 2);
     var end = Math.min(p.totalPages, start + 4);
@@ -140,7 +140,7 @@
     }
 
     html += '<button type="button" data-page="' + (p.page + 1) + '"' + (p.hasNext ? '' : ' disabled') + ' aria-label="Halaman berikutnya">' +
-      UI.icon('chevron-right', 'icon icon-sm') + '</button>';
+      UI.icon('chevron-right', 'icon-sm') + '</button>';
 
     pagination.innerHTML = html;
     pagination.querySelectorAll('button[data-page]').forEach(function (btn) {

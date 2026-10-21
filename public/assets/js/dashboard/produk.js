@@ -54,8 +54,8 @@
             '<td class="num">' + UI.formatNumber(p.soldCount) + '</td>' +
             '<td>' + statusBadge(p.status) + '</td>' +
             '<td class="text-right" style="white-space:nowrap">' +
-            '<button class="btn btn-ghost btn-sm" data-edit="' + p._id + '" aria-label="Ubah produk">' + UI.icon('edit-3', 'icon icon-sm') + '</button> ' +
-            '<button class="btn btn-ghost btn-sm" data-hapus="' + p._id + '" aria-label="Hapus produk" style="color:var(--danger)">' + UI.icon('trash-2', 'icon icon-sm') + '</button>' +
+            '<button class="btn btn-ghost btn-sm" data-edit="' + p._id + '" aria-label="Ubah produk">' + UI.icon('edit-3', 'icon-sm') + '</button> ' +
+            '<button class="btn btn-ghost btn-sm" data-hapus="' + p._id + '" aria-label="Hapus produk" style="color:var(--danger)">' + UI.icon('trash-2', 'icon-sm') + '</button>' +
             '</td></tr>';
         })
         .join('') +
@@ -175,7 +175,7 @@
 
     function showError(message) {
       errorHost.innerHTML =
-        '<div class="alert alert-error mb-4">' + UI.icon('alert-circle', 'icon icon-sm') +
+        '<div class="alert alert-error mb-4">' + UI.icon('alert-circle', 'icon-sm') +
         '<span>' + UI.escapeHtml(message) + '</span></div>';
     }
 
@@ -209,7 +209,7 @@
               '<img src="' + UI.escapeHtml(img.url) + '" alt="" style="width:74px;height:58px;object-fit:cover;border-radius:8px;border:1px solid var(--border)">' +
               '<button type="button" class="btn btn-danger btn-icon" data-hapus-foto="' + img._id +
               '" style="position:absolute;top:-6px;right:-6px;width:24px;min-height:24px;height:24px;border-radius:50%;padding:0" aria-label="Hapus foto">' +
-              UI.icon('x', 'icon icon-sm') + '</button></span>';
+              UI.icon('x', 'icon-sm') + '</button></span>';
           })
           .join('');
 

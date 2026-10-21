@@ -98,8 +98,10 @@ Pesan yang dikembalikan selalu sama supaya tidak membocorkan nomor mana yang ter
   provider (Cloudinary atau lokal) dan hanya menyimpan URL + dimensi + ukuran file.
 - Upload divalidasi 3 lapis: MIME (multer) → ukuran (multer) → **magic bytes** (isi file
   benar-benar gambar PNG/JPEG/WebP) → dicocokkan dengan `Content-Type` yang dikirim.
-- Halaman profil toko **tidak pernah menampilkan alamat lengkap secara otomatis**;
-  hanya kota, kecuali penjual mencentang "tampilkan alamat lengkap".
+- Halaman profil toko **tidak pernah menampilkan kelas/lokasi secara otomatis**; hanya kota,
+  kecuali penjual mencentang "Tampilkan kelas / lokasi di sekolah di halaman publik".
+  Yang ditanyakan ke penjual adalah **kelas atau lokasi di sekolah** (mis. "Kelas XI RPL 1"),
+  bukan alamat rumah — supaya tidak ada data pribadi yang bocor.
 
 ---
 
@@ -126,8 +128,10 @@ pembayaran berhasil."*
 - Ulasan hanya bisa dibuat dari pesanan berstatus `completed` milik pembaca.
 - Unique index `{ orderId, buyerId }` mencegah rating ganda untuk pesanan yang sama.
 - Ulasan yang disembunyikan admin dikeluarkan dari perhitungan rating (dicek lewat tes).
-- Semua ulasan diberi label **"Belum terverifikasi"** — jujur, karena pembayaran lewat
-  WhatsApp tidak bisa diverifikasi otomatis.
+- **Label verifikasi dihapus** (keputusan user saat polish UI). Semua ulasan dulu diberi
+  label "Belum terverifikasi"; karena transaksi lewat WhatsApp tidak punya sumber pembayaran
+  yang bisa diverifikasi otomatis, label seperti itu hanya menimbulkan kesan palsu. Field
+  `isVerifiedPurchase` ikut dihapus dari model, service, dan API.
 - Ada endpoint `POST /api/reports` untuk melaporan ulasan/produk yang tidak pantas.
 
 ---
@@ -265,7 +269,7 @@ tidak mengotori database asli.
 | Fitur | Alasan | Versi sederhana yang dipakai |
 |---|---|---|
 | Payment gateway | Butuh rekening merchant & biaya | Bayar via WhatsApp + pencatatan manual |
-| Verifikasi pembelian otomatis | Tidak ada sumber pembayaran yang bisa dicek | Label "Belum terverifikasi" + moderasi |
+| Verifikasi pembelian otomatis | Tidak ada sumber pembayaran yang bisa dicek | Tanpa label verifikasi + moderasi |
 | Live chat | Kompleks (WebSocket) | Chat WhatsApp |
 | Notifikasi email | Perlu layanan email | Toast in-app |
 | Dark mode | Perlu token warna ganda | Terus terang |

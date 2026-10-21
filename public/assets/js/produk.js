@@ -75,9 +75,6 @@
           '<div><strong>' + UI.escapeHtml(r.buyerId && r.buyerId.name ? r.buyerId.name : 'Pembeli') + '</strong>' +
           '<div class="tiny muted">' + UI.formatRelative(r.createdAt) + '</div></div>' +
           UI.stars(r.rating) +
-          (r.isVerifiedPurchase
-            ? '<span class="badge badge-info">Terverifikasi</span>'
-            : '<span class="badge badge-outline" title="Transaksi dilakukan lewat WhatsApp sehingga tidak dapat diverifikasi otomatis">Belum terverifikasi</span>') +
           '</div>' +
           '<p class="mb-0">' + UI.escapeHtml(r.comment) + '</p>' +
           '</article>';
@@ -157,7 +154,7 @@
       '<a class="btn btn-outline btn-block" href="' + UI.escapeHtml(waLink) + '" target="_blank" rel="noopener">' +
       UI.icon('phone') + ' Chat langsung ke penjual</a>' +
       '</div>' +
-      '<div class="alert alert-info mt-4">' + UI.icon('info', 'icon icon-sm') +
+      '<div class="alert alert-info mt-4">' + UI.icon('info', 'icon-sm') +
       '<span>Membuka WhatsApp belum berarti pesanan terkonfirmasi atau pembayaran berhasil. ' +
       'Penjual akan mengonfirmasi lewat WhatsApp. Permintaan pesanan tetap tercatat di dashboard penjual.</span></div>' +
       (data.canReview ? '<button class="btn btn-primary btn-block mt-3" id="btn-ulasan">' + UI.icon('star') + ' Beri ulasan</button>' : '') +
@@ -263,7 +260,7 @@
           '<div class="field"><label class="label">Rating</label>' + options + '</div>' +
           '<div class="field"><label class="label" for="ulasan-komentar">Komentar</label>' +
           '<textarea class="textarea" id="ulasan-komentar" placeholder="Bagaimana produk ini? Minimal 5 karakter."></textarea>' +
-          '<p class="hint">Ulasan akan ditandai "belum terverifikasi" karena konfirmasi pembayaran dilakukan lewat WhatsApp.</p></div>' +
+          '<p class="hint">Ulasan hanya bisa ditulis untuk pesanan yang sudah selesai.</p></div>' +
           '<div id="ulasan-error"></div>',
         footer:
           '<button class="btn btn-ghost" data-close>Batal</button>' +
@@ -287,7 +284,7 @@
             load();
           })
           .catch(function (err) {
-            errorHost.innerHTML = '<div class="alert alert-error">' + UI.icon('alert-circle', 'icon icon-sm') +
+            errorHost.innerHTML = '<div class="alert alert-error">' + UI.icon('alert-circle', 'icon-sm') +
               '<span>' + UI.escapeHtml(err.message) + '</span></div>';
           });
       });

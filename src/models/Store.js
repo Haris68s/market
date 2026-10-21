@@ -18,10 +18,11 @@ const storeSchema = new mongoose.Schema(
     whatsapp: { type: String, required: true, trim: true },
 
     location: {
+      // Kelas / lokasi tempat penjual berada (mis. "Kelas XI RPL 1" atau "Kantin Sekolah")
       address: { type: String, default: '', trim: true, maxlength: 300 },
       city: { type: String, default: '', trim: true, maxlength: 100 },
       // Penjual sendiri yang menentukan apa yang ditampilkan publik.
-      // Default: alamat detail TIDAK ditampilkan, hanya kota.
+      // Default: kelas/lokasi detail TIDAK ditampilkan, hanya kota.
       showAddress: { type: Boolean, default: false },
       showExactAddress: { type: Boolean, default: false },
     },

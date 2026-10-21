@@ -34,6 +34,10 @@
       '<div><span>Jumlah ulasan</span><strong>' + UI.formatNumber(store.ratingCount) + '</strong></div>' +
       '<div><span>Terjual (tercatat)</span><strong>' + UI.formatNumber(store.totalSold) + '</strong></div>' +
       '</div>' +
+      (store.location && store.location.address
+        ? '<div class="flex mt-3 small muted"><span>' + UI.icon('map-pin', 'icon-sm') + '</span>' +
+          '<span>Kelas / Lokasi: ' + UI.escapeHtml(store.location.address) + '</span></div>'
+        : '') +
       '</div>'
     );
   }

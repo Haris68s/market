@@ -334,8 +334,10 @@ pesanan *selesai*.
 - Ulasan **wajib** berasal dari pesanan berstatus *selesai*.
 - Satu orang hanya boleh mengulas **satu kali per pesanan** (dijaga unique index).
 - Ulasan yang disembunyikan admin **tidak** ikut dihitung ke rating rata-rata.
-- Semua ulasan berlabel **"Belum terverifikasi"**, karena pembayaran terjadi di WhatsApp
-  dan tidak bisa diverifikasi otomatis.
+- **Tidak ada label "terverifikasi"/"belum terverifikasi"** pada ulasan. Fitur itu sengaja
+  dihapus: transaksi terjadi lewat WhatsApp sehingga tidak ada sumber pembayaran yang bisa
+  diverifikasi otomatis, dan menampilkan label seperti itu hanya menimbulkan kesan palsu.
+
 
 ### 3. Keuangan
 
@@ -351,7 +353,13 @@ Selisih arus kas = total pemasukan - total pengeluaran
 - **Selisih arus kas belum tentu sama dengan laba.** Nilainya hanya akurat bila semua modal
   dan biaya ikut dicatat. Aplikasi selalu menampilkan catatan ini di bawah angka.
 
-### 4. Produk terlaris & rating tertinggi
+### 4. Lokasi toko
+Toko menyimpan **kota/area** dan **kelas atau lokasi di sekolah** (mis. "Kelas XI RPL 1",
+"Perpustakaan", "Kantin Sekolah").
+
+- Yang tampil di halaman publik hanya **kota**, kecuali penjual mencentang
+  "Tampilkan kelas / lokasi di sekolah di halaman publik".
+- Alamat rumah tidak pernah diminta, jadi tidak ada data pribadi yang bocor.
 
 - **Terlaris** dihitung dari `soldCount`, yaitu pesanan berstatus *selesai* — bukan dari
   jumlah klik tombol WhatsApp.

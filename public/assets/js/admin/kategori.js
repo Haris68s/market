@@ -32,9 +32,9 @@
             '<td><span class="badge ' + (c.isActive ? '' : 'badge-muted') + '">' +
             (c.isActive ? 'Aktif' : 'Nonaktif') + '</span></td>' +
             '<td class="text-right" style="white-space:nowrap">' +
-            '<button class="btn btn-ghost btn-sm" data-edit="' + c._id + '">' + UI.icon('edit-3', 'icon icon-sm') + '</button> ' +
+            '<button class="btn btn-ghost btn-sm" data-edit="' + c._id + '">' + UI.icon('edit-3', 'icon-sm') + '</button> ' +
             '<button class="btn btn-ghost btn-sm" data-hapus="' + c._id + '" style="color:var(--danger)">' +
-            UI.icon('trash-2', 'icon icon-sm') + '</button></td></tr>';
+            UI.icon('trash-2', 'icon-sm') + '</button></td></tr>';
         })
         .join('') +
       '</tbody></table></div>';
@@ -107,7 +107,7 @@
 
       if (!payload.name) {
         errorHost.innerHTML =
-          '<div class="alert alert-error">' + UI.icon('alert-circle', 'icon icon-sm') +
+          '<div class="alert alert-error">' + UI.icon('alert-circle', 'icon-sm') +
           '<span>Nama kategori wajib diisi.</span></div>';
         return;
       }
@@ -124,7 +124,7 @@
         })
         .catch(function (err) {
           errorHost.innerHTML =
-            '<div class="alert alert-error">' + UI.icon('alert-circle', 'icon icon-sm') +
+            '<div class="alert alert-error">' + UI.icon('alert-circle', 'icon-sm') +
             '<span>' + UI.escapeHtml(err.message) + '</span></div>';
         });
     });

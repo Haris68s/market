@@ -10,7 +10,7 @@
 
   function showError(message) {
     errorHost.innerHTML =
-      '<div class="alert alert-error mb-4">' + UI.icon('alert-circle', 'icon icon-sm') +
+      '<div class="alert alert-error mb-4">' + UI.icon('alert-circle', 'icon-sm') +
       '<span>' + UI.escapeHtml(message) + '</span></div>';
   }
 

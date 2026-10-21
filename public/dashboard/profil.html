@@ -65,12 +65,16 @@
               <h3>Lokasi</h3>
               <div class="field">
                 <label class="label" for="city">Kota / area</label>
-                <input class="input" id="city" name="city" maxlength="100">
+                <input class="input" id="city" name="city" maxlength="100" placeholder="Contoh: Bandung">
               </div>
               <div class="field">
-                <label class="label" for="address">Alamat lengkap</label>
-                <input class="input" id="address" name="address" maxlength="300">
-                <p class="hint">Alamat disimpan di database, tapi tidak ditampilkan publik kecuali kamu mencentang.</p>
+                <label class="label" for="address">Kelas / Lokasi di sekolah</label>
+                <input class="input" id="address" name="address" maxlength="300"
+                       placeholder="Contoh: Kelas XI RPL 1, Perpustakaan, atau Kantin Sekolah">
+                <p class="hint">
+                  Tulis kelas atau tempat di sekolah kamu. Lokasi ini disimpan di database,
+                  dan hanya ditampilkan ke pembeli kalau kamu mencentang di bawah.
+                </p>
               </div>
 
               <div class="field">
@@ -82,7 +86,7 @@
               <div class="field">
                 <label class="checkbox">
                   <input type="checkbox" id="showExactAddress" name="showExactAddress">
-                  <span>Tampilkan alamat lengkap di halaman publik <strong>(hati-hati, alamatmu jadi terlihat oleh semua orang)</strong></span>
+                  <span>Tampilkan kelas / lokasi di sekolah di halaman publik</span>
                 </label>
               </div>
 

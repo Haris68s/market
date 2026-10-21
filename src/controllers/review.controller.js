@@ -40,10 +40,8 @@ const createReview = asyncHandler(async (req, res) => {
         rating: result.review.rating,
         comment: result.review.comment,
         status: result.review.status,
-        isVerifiedPurchase: result.review.isVerifiedPurchase,
         createdAt: result.review.createdAt,
       },
-      notice: 'Ulasan ini ditandai "belum terverifikasi" karena konfirmasi pembayaran dilakukan di WhatsApp.',
     },
   });
 });

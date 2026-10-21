@@ -155,7 +155,7 @@
         })
         .catch(function (err) {
           errorHost.innerHTML =
-            '<div class="alert alert-error">' + UI.icon('alert-circle', 'icon icon-sm') +
+            '<div class="alert alert-error">' + UI.icon('alert-circle', 'icon-sm') +
             '<span>' + UI.escapeHtml(err.message) + '</span></div>';
         });
     });

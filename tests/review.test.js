@@ -52,8 +52,8 @@ test('pembeli bisa mengulas produk dari pesanan yang sudah selesai', async () =>
 
   assert.equal(res.status, 201);
   assert.equal(res.body.data.review.rating, 5);
-  // Transaksi lewat WhatsApp tidak diverifikasi otomatis
-  assert.equal(res.body.data.review.isVerifiedPurchase, false);
+  // Fitur "terverifikasi" dihapus: tidak ada lagi penanda di respons API.
+  assert.equal(res.body.data.review.isVerifiedPurchase, undefined);
 });
 
 test('ulasan ditolak bila pesanan belum selesai', async () => {

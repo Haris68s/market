@@ -80,7 +80,7 @@
 
       if (reason.length < 5) {
         errorHost.innerHTML =
-          '<div class="alert alert-error">' + UI.icon('alert-circle', 'icon icon-sm') +
+          '<div class="alert alert-error">' + UI.icon('alert-circle', 'icon-sm') +
           '<span>Alasan wajib diisi minimal 5 karakter.</span></div>';
         return;
       }
@@ -93,7 +93,7 @@
         })
         .catch(function (err) {
           errorHost.innerHTML =
-            '<div class="alert alert-error">' + UI.icon('alert-circle', 'icon icon-sm') +
+            '<div class="alert alert-error">' + UI.icon('alert-circle', 'icon-sm') +
             '<span>' + UI.escapeHtml(err.message) + '</span></div>';
         });
     });

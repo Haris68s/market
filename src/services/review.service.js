@@ -71,8 +71,6 @@ async function createReview({ productId, orderId, buyerId, buyerName, rating, co
     rating: value,
     comment: text,
     status: 'published',
-    // Transaksi lewat WhatsApp tidak bisa diverifikasi otomatis.
-    isVerifiedPurchase: false,
   });
 
   // Perbarui cache rating.

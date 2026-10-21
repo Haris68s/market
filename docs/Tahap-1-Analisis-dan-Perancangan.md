@@ -93,7 +93,7 @@ Buka Beranda
                                                         Status → "selesai"  → rating & ulasan dibuka
 ```
 
-**Penting:** membuka WhatsApp **bukan** bukti pembayaran. Pembeli baru bisa memberi ulasan setelah pesanan berstatus *selesai*, dan ulasan akan diberi label **"Belum terverifikasi"** karena verifikasi pembayaran otomatis tidak tersedia.
+**Penting:** membuka WhatsApp **bukan** bukti pembayaran. Pembeli baru bisa memberi ulasan setelah pesanan berstatus *selesai*, dan tidak ada label verifikasi yang ditampilkan, karena verifikasi pembayaran otomatis tidak tersedia.
 
 ### 2.2 Alur Penjual (Seller)
 
@@ -240,7 +240,7 @@ Konsekuensinya:
   category: String,                        // kategori utama (slug kategori)
   whatsapp: String,                        // kontak publik (bisa berbeda dari akun)
   location: {
-    address: String,                       // disimpan lengkap
+    address: String,                       // kelas / lokasi di sekolah (mis. "Kelas XI RPL 1")
     city: String,
     showAddress: Boolean,                  // PENJUAL yang memilih apa yang dipublikasikan
     showExactAddress: Boolean              // default false → hanya kota yang tampil
@@ -324,7 +324,6 @@ Index: `orderCode` (unique), `{ storeId, status }`, `{ storeId, createdAt: -1 }`
   rating: Number,                          // integer 1..5 (divalidasi backend)
   comment: String,                         // 10..1000 karakter
   status: "published" | "hidden" | "pending",
-  isVerifiedPurchase: Boolean,             // default false → label "Belum terverifikasi"
   moderation: { hiddenBy: ObjectId|null, hiddenAt: Date|null, reason: String|null },
   createdAt: Date, updatedAt: Date
 }
@@ -470,7 +469,7 @@ Semua prefix `/api`. Format respons seragam:
 | Tidak ada verifikasi pembayaran otomatis | Bisa ada pesanan palsu / tidak dibayar | Status "menunggu konfirmasi"; konfirmasi tetap dilakukan penjual secara manual; catatan eksplisit di UI |
 | Nomor WA bisa dipakai/dibohongi pembeli | Spam pesanan palsu | Rate limit endpoint order, catat IP, seller bisa membatalkan |
 | Stok bisa bentrok (2 orang pesan stok 1) | Oversell | Backend tidak decreased stok otomatis; seller yang memvalidasi saat konfirmasi |
-| Pembeli bisa memberi ulasan tanpa transaksi | Rating palsu | Ulasan wajib dari pesanan berstatus *selesai*; label "Belum terverifikasi"; minimal 1 ulasan untuk masuk daftar rating tertinggi |
+| Pembeli bisa memberi ulasan tanpa transaksi | Rating palsu | Ulasan wajib dari pesanan berstatus *selesai*; tanpa label verifikasi; minimal 1 ulasan untuk masuk daftar rating tertinggi |
 | Perubahan harga produk mengubah riwayat | Data keuangan kacau | `priceSnapshot` & `subtotal` disimpan saat pesanan dibuat |
 | Pembukaan WhatsApp = "sukses"? | Salah paham | Pesanan dicatat backend dengan status *menunggu konfirmasi*, bukan *berhasil* |
 | `wa.me` butuh nomor format internasional | Link rusak | Normalisasi ke `62xxx` di backend, validasi regex `^62[0-9]{8,13}$` |
@@ -519,7 +518,7 @@ Semua prefix `/api`. Format respons seragam:
 | Fitur | Alasan ditunda | Sederhanakan versi awal |
 |---|---|---|
 | Payment gateway | Butuh rekening merchant & biaya | Payment via WhatsApp + pencatatan manual |
-| Verifikasi pembelian otomatis | Butuh integrasi pembayaran | Label "Belum terverifikasi" + moderasi |
+| Verifikasi pembelian otomatis | Butuh integrasi pembayaran | Tanpa label verifikasi + moderasi |
 | Live chat di dalam aplikasi | Kompleks, butuh WebSocket | Chat WhatsApp |
 | Multi-bahasa | Menambah beban | Bahasa Indonesia saja |
 | Notifikasi email otomatis | Butuh layanan email & konfigurasi | Notifikasi in-app (toast) + WhatsApp |
@@ -570,6 +569,8 @@ Semua prefix `/api`. Format respons seragam:
 | D11 |Reset password = **verifikasi admin via WhatsApp + token sekali pakai (SHA-256, 30 menit)** | ✅ Dipilih | Tidak ada email, jadi verifikasi manual satu-satunya opsi yang realistis & aman. |
 | D12 | `sanitizeFilter` Mongoose **tidak** dipakai | ✅ Dipilih | Opsi tersebut membungkus `$regex` jadi `$eq` sehingga pencarian rusak. Proteksi NoSQL injection berasal dari validasi Zod + filter yang dibangun di service + `escapeRegex()`. |
 | D13 | Grafik memakai **Chart.js dimuat lazy dari CDN** | ✅ Dipilih | Ringan & mudah. Halaman tanpa grafik tetap tidak memuatnya. Ikon tetap lokal (tanpa CDN). |
+| D14 | Label **"terverifikasi"/"belum terverifikasi"** pada ulasan **dihapus** | ✅ Dipilih (user) | Transaksi lewat WhatsApp tidak punya sumber pembayaran yang bisa diverifikasi otomatis. Menampilkan label seperti itu hanya menimbulkan kesan palsu → field `isVerifiedPurchase` dihapus dari model, service, dan API. |
+| D15 | Lokasi toko diisi **kelas / lokasi di sekolah**, bukan alamat rumah | ✅ Dipilih (user) | Relevan untuk marketplace siswa. Alamat rumah tidak pernah diminta sehingga tidak ada data pribadi yang bocor. Field `location.address` dipakai untuk "Kelas XI RPL 1 / Perpustakaan / Kantin". |
 
 ### Hasil implementasi (lihat `Laporan-Implementasi-dan-Pengujian.md`)
 - 115 pengujian otomatis, semuanya lulus.

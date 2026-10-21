@@ -128,8 +128,8 @@
             '<td class="text-right">' +
             (t.source === 'order'
               ? '<span class="tiny muted">otomatis</span>'
-              : '<button class="btn btn-ghost btn-sm" data-edit="' + t._id + '">' + UI.icon('edit-3', 'icon icon-sm') + '</button> ' +
-                '<button class="btn btn-ghost btn-sm" data-hapus="' + t._id + '" style="color:var(--danger)">' + UI.icon('trash-2', 'icon icon-sm') + '</button>') +
+              : '<button class="btn btn-ghost btn-sm" data-edit="' + t._id + '">' + UI.icon('edit-3', 'icon-sm') + '</button> ' +
+                '<button class="btn btn-ghost btn-sm" data-hapus="' + t._id + '" style="color:var(--danger)">' + UI.icon('trash-2', 'icon-sm') + '</button>') +
             '</td></tr>';
         })
         .join('') +
@@ -217,7 +217,7 @@
         })
         .catch(function (err) {
           errorHost.innerHTML =
-            '<div class="alert alert-error">' + UI.icon('alert-circle', 'icon icon-sm') +
+            '<div class="alert alert-error">' + UI.icon('alert-circle', 'icon-sm') +
             '<span>' + UI.escapeHtml(err.message) + '</span></div>';
         });
     });

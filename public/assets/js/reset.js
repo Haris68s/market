@@ -42,7 +42,7 @@
           button.disabled = false;
           button.innerHTML = original;
           box.innerHTML =
-            '<div class="alert alert-success mb-4">' + UI.icon('check-circle', 'icon icon-sm') +
+            '<div class="alert alert-success mb-4">' + UI.icon('check-circle', 'icon-sm') +
             '<span>' + UI.escapeHtml(data.message) + '</span></div>';
           form.classList.add('hidden');
         })
@@ -50,7 +50,7 @@
           button.disabled = false;
           button.innerHTML = original;
           box.innerHTML =
-            '<div class="alert alert-error mb-4">' + UI.icon('alert-circle', 'icon icon-sm') +
+            '<div class="alert alert-error mb-4">' + UI.icon('alert-circle', 'icon-sm') +
             '<span>' + UI.escapeHtml(err.message) + '</span></div>';
           if (err.details) showErrors(form, err.details);
         });
@@ -86,7 +86,7 @@
           button.disabled = false;
           button.innerHTML = original;
           box.innerHTML =
-            '<div class="alert alert-success mb-4">' + UI.icon('check-circle', 'icon icon-sm') +
+            '<div class="alert alert-success mb-4">' + UI.icon('check-circle', 'icon-sm') +
             '<span>' + UI.escapeHtml(data.message) + '</span></div>';
           form.classList.add('hidden');
           setTimeout(function () { window.location.href = '/masuk.html'; }, 1500);
@@ -95,7 +95,7 @@
           button.disabled = false;
           button.innerHTML = original;
           box.innerHTML =
-            '<div class="alert alert-error mb-4">' + UI.icon('alert-circle', 'icon icon-sm') +
+            '<div class="alert alert-error mb-4">' + UI.icon('alert-circle', 'icon-sm') +
             '<span>' + UI.escapeHtml(err.message) + '</span></div>';
           if (err.details) showErrors(form, err.details);
         });
