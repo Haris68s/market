@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Manajemen Pesanan &mdash; KantinSiswa</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/dashboard.css">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <div class="dash-layout">
+    <aside class="dash-side" id="dash-side"></aside>
+
+    <main class="dash-main">
+      <div class="dash-head">
+        <div>
+          <h1>Manajemen Pesanan</h1>
+          <p>Permintaan pesanan dari pembeli lewat WhatsApp.</p>
+        </div>
+      </div>
+
+      <div class="alert alert-info mb-4">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="/assets/icons/sprite.svg#info"></use></svg>
+        <span>
+          Membuka WhatsApp <strong>bukan</strong> bukti pembayaran. Konfirmasi tetap dilakukan manual
+          bersama pembeli di WhatsApp, lalu kamu ubah statusnya di sini.
+        </span>
+      </div>
+
+      <div class="dash-toolbar">
+        <div class="field">
+          <label class="label" for="filter-status">Status</label>
+          <select class="select" id="filter-status">
+            <option value="all">Semua status</option>
+            <option value="pending">Menunggu konfirmasi</option>
+            <option value="confirmed">Dikonfirmasi</option>
+            <option value="completed">Selesai</option>
+            <option value="cancelled">Dibatalkan</option>
+          </select>
+        </div>
+      </div>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Daftar Pesanan</h2>
+          <span class="muted small" id="jumlah-pesanan"></span>
+        </div>
+        <div class="card-body" id="daftar-pesanan"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/dashboard-common.js"></script>
+  <script src="/assets/js/dashboard/pesanan.js"></script>
+</body>
+</html>

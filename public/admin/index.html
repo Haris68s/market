@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Admin &mdash; KantinSiswa</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/dashboard.css">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <div class="dash-layout">
+    <aside class="dash-side" id="dash-side"></aside>
+
+    <main class="dash-main">
+      <div class="dash-head">
+        <div>
+          <h1>Ringkasan Marketplace</h1>
+          <p>Pantau aktivitas, moderasi, dan kesehatan marketplace.</p>
+        </div>
+      </div>
+
+      <div class="stat-grid" id="stat-grid"></div>
+
+      <div class="grid grid-2" style="align-items:start">
+        <section class="card">
+          <div class="card-head"><h2>Pesanan 6 Bulan Terakhir</h2></div>
+          <div class="card-body">
+            <div class="chart-box"><canvas id="chart-orders"></canvas></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-head"><h2>Toko Terlaris</h2><span class="muted small">Berdasarkan pesanan selesai</span></div>
+          <div class="card-body" id="top-stores"></div>
+        </section>
+      </div>
+
+      <section class="card mt-5">
+        <div class="card-head"><h2>Produk Terlaris</h2></div>
+        <div class="card-body" id="top-products"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/admin-common.js"></script>
+  <script src="/assets/js/chart.js"></script>
+  <script src="/assets/js/admin/ringkasan.js"></script>
+</body>
+</html>

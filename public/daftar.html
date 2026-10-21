@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Daftar Penjual &mdash; KantinSiswa</title>
+  <meta name="description" content="Daftar sebagai penjual di KantinSiswa. Buka toko, kelola produk, dan catat keuangan.">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/public.css">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main class="auth-wrap">
+    <div class="auth-card auth-card-wide">
+      <div class="auth-head">
+        <a class="brand" href="/">
+          <span class="brand-mark"><svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#shopping-bag"></use></svg></span>
+          <span class="brand-text">KantinSiswa<small>Marketplace Siswa</small></span>
+        </a>
+        <h1>Daftar &amp; buka toko</h1>
+        <p>Gratis. Cuma butuh nomor WhatsApp dan password.</p>
+      </div>
+
+      <div id="register-error"></div>
+
+      <form id="form-register" novalidate>
+        <h3>Data penjual</h3>
+        <div class="form-row">
+          <div class="field">
+            <label class="label" for="name">Nama lengkap <span class="req">*</span></label>
+            <input class="input" type="text" id="name" name="name" placeholder="Nama lengkap kamu" required>
+            <p class="error-text" data-error-for="name"></p>
+          </div>
+          <div class="field">
+            <label class="label" for="whatsapp">Nomor WhatsApp <span class="req">*</span></label>
+            <input class="input" type="tel" id="whatsapp" name="whatsapp" inputmode="numeric"
+                   autocomplete="username" placeholder="081234567890" required>
+            <p class="error-text" data-error-for="whatsapp"></p>
+            <p class="hint">Dipakai untuk login dan contacted pembeli.</p>
+          </div>
+        </div>
+
+        <h3 class="mt-5">Data toko</h3>
+        <div class="form-row">
+          <div class="field">
+            <label class="label" for="storeName">Nama toko <span class="req">*</span></label>
+            <input class="input" type="text" id="storeName" name="storeName" placeholder="Contoh: Kedai Budi" required>
+            <p class="error-text" data-error-for="storeName"></p>
+          </div>
+          <div class="field">
+            <label class="label" for="category">Kategori utama <span class="req">*</span></label>
+            <select class="select" id="category" name="category" required>
+              <option value="">Pilih kategori</option>
+            </select>
+            <p class="error-text" data-error-for="category"></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="description">Deskripsi toko</label>
+          <textarea class="textarea" id="description" name="description" maxlength="1000"
+                    placeholder="Ceritakan produk yang kamu jual, jam buka, cara pesan, dan lainnya."></textarea>
+          <p class="hint">Maksimal 1000 karakter.</p>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label class="label" for="city">Kota / area</label>
+            <input class="input" type="text" id="city" name="city" maxlength="100" placeholder="Contoh: Bandung">
+            <p class="hint">Hanya kota yang tampil di halaman publik.</p>
+          </div>
+          <div class="field">
+            <label class="label" for="address">Alamat lengkap</label>
+            <input class="input" type="text" id="address" name="address" maxlength="300" placeholder="Contoh: Jl. Sekolah No. 1">
+            <p class="hint">Disimpan, tapi tidak ditampilkan publik secara otomatis.</p>
+          </div>
+        </div>
+
+        <h3 class="mt-5">Keamanan akun</h3>
+        <div class="form-row">
+          <div class="field">
+            <label class="label" for="password">Password <span class="req">*</span></label>
+            <input class="input" type="password" id="password" name="password"
+                   autocomplete="new-password" placeholder="Minimal 8 karakter" required>
+            <p class="error-text" data-error-for="password"></p>
+          </div>
+          <div class="field">
+            <label class="label" for="passwordConfirm">Ulangi password <span class="req">*</span></label>
+            <input class="input" type="password" id="passwordConfirm" name="passwordConfirm"
+                   autocomplete="new-password" placeholder="Ketik ulang password" required>
+            <p class="error-text" data-error-for="passwordConfirm"></p>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="checkbox">
+            <input type="checkbox" id="agreed" name="agreed" required>
+            <span>Saya setuju dengan aturan marketplace KantinSiswa: produk yang dijual asli, tidak melanggar hukum,
+              dan transaksi dikonfirmasi lewat WhatsApp. <span class="req">*</span></span>
+          </label>
+          <p class="error-text" data-error-for="agreed"></p>
+        </div>
+
+        <button class="btn btn-primary btn-lg btn-block" type="submit" id="btn-daftar">Buat akun &amp; buka toko</button>
+      </form>
+
+      <div class="auth-footer">
+        Sudah punya akun? <a href="/masuk.html">Masuk di sini</a>
+      </div>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/auth.js"></script>
+</body>
+</html>

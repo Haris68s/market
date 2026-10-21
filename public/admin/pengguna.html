@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pengguna &amp; Toko &mdash; Panel Admin</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/dashboard.css">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <div class="dash-layout">
+    <aside class="dash-side" id="dash-side"></aside>
+
+    <main class="dash-main">
+      <div class="dash-head">
+        <div>
+          <h1>Pengguna &amp; Toko</h1>
+          <p>Kelola akun penjual dan status toko.</p>
+        </div>
+      </div>
+
+      <div class="dash-toolbar">
+        <div class="field" style="flex:1 1 220px">
+          <label class="label" for="q">Cari</label>
+          <input class="input" type="search" id="q" placeholder="Nama, WhatsApp, atau email...">
+        </div>
+        <div class="field">
+          <label class="label" for="filter-role">Peran</label>
+          <select class="select" id="filter-role">
+            <option value="all">Semua</option>
+            <option value="seller">Penjual</option>
+            <option value="superadmin">Super admin</option>
+          </select>
+        </div>
+        <div class="field">
+          <label class="label" for="filter-status">Status</label>
+          <select class="select" id="filter-status">
+            <option value="all">Semua status</option>
+            <option value="active">Aktif</option>
+            <option value="suspended">Dinonaktifkan</option>
+            <option value="pending">Menunggu</option>
+          </select>
+        </div>
+      </div>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Daftar Pengguna</h2>
+          <span class="muted small" id="jumlah-pengguna"></span>
+        </div>
+        <div class="card-body" id="daftar-pengguna"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/admin-common.js"></script>
+  <script src="/assets/js/admin/pengguna.js"></script>
+</body>
+</html>

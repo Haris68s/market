@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KantinSiswa &mdash; Marketplace Produk &amp; Jasa Antar Siswa</title>
+  <meta name="description" content="KantinSiswa adalah marketplace produk dan jasa antar siswa SMK. Temukan produk dari teman sekelas, pesan lewat WhatsApp, dan buka toko sendiri.">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/public.css">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div>
+          <span class="hero-eyebrow" id="hero-eyebrow">Marketplace siswa SMK</span>
+          <h1 id="hero-title">Beli &amp; Jual di Kalangan Siswa Sendiri</h1>
+          <p class="lead" id="hero-subtitle">
+            Temukan produk dan jasa dari teman sekelas, UKM, atau kelas sebelah.
+            Pesan langsung lewat WhatsApp, tanpa ribet.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="/katalog.html">
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#search"></use></svg>
+              Jelajahi Katalog
+            </a>
+            <a class="btn btn-outline btn-lg" href="/daftar.html">
+              <svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#store"></use></svg>
+              Buka Toko Saya
+            </a>
+          </div>
+          <div class="hero-stats" id="hero-stats"></div>
+        </div>
+
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-card">
+            <div class="hero-card-icon"><svg class="icon"><use href="/assets/icons/sprite.svg#message-circle"></use></svg></div>
+            <strong>Pesan via WhatsApp</strong>
+            <span>Konfirmasi langsung ke penjual</span>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-icon"><svg class="icon"><use href="/assets/icons/sprite.svg#store"></use></svg></div>
+            <strong>Buka toko gratis</strong>
+            <span>Kelola produk sendiri</span>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-icon"><svg class="icon"><use href="/assets/icons/sprite.svg#star"></use></svg></div>
+            <strong>Rating &amp; ulasan</strong>
+            <span>Bantu teman memilih</span>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-icon"><svg class="icon"><use href="/assets/icons/sprite.svg#wallet"></use></svg></div>
+            <strong>Catat keuangan</strong>
+            <span>Pemasukan &amp; pengeluaran</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Kategori -->
+    <section class="section" id="section-kategori">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Kategori</h2>
+            <p>Pilih kategori untuk menemukan produk yang kamu cari.</p>
+          </div>
+          <a class="btn btn-ghost" href="/katalog.html">Lihat semua <svg class="icon icon-sm" aria-hidden="true"><use href="/assets/icons/sprite.svg#arrow-right"></use></svg></a>
+        </div>
+        <div class="grid grid-4" id="kategori-grid"></div>
+      </div>
+    </section>
+
+    <!-- Produk terbaru -->
+    <section class="section" id="section-terbaru" style="padding-top:0">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Produk Terbaru</h2>
+            <p>Baru saja diunggah oleh fellow students.</p>
+          </div>
+        </div>
+        <div id="terbaru-grid"></div>
+      </div>
+    </section>
+
+    <!-- Produk terlaris -->
+    <section class="section" id="section-terlaris" style="padding-top:0">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Produk Terlaris</h2>
+            <p>Diurutkan dari pesanan yang benar-benar selesai.</p>
+          </div>
+        </div>
+        <div id="terlaris-grid"></div>
+      </div>
+    </section>
+
+    <!-- Rating tertinggi -->
+    <section class="section" id="section-rating" style="padding-top:0">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Rating Tertinggi</h2>
+            <p id="rating-note">Produk dengan ulasan terbanyak dan rating terbaik.</p>
+          </div>
+        </div>
+        <div id="rating-grid"></div>
+      </div>
+    </section>
+
+    <!-- Toko pilihan -->
+    <section class="section" id="section-toko" style="padding-top:0">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <h2>Toko Pilihan</h2>
+            <p>Toko yang aktif dan punya penilaian baik.</p>
+          </div>
+        </div>
+        <div class="grid grid-3" id="toko-grid"></div>
+      </div>
+    </section>
+
+    <!-- Ajakan buka toko -->
+    <section class="section" style="padding-top:0">
+      <div class="container">
+        <div class="cta-banner">
+          <div>
+            <h2>Punya produk atau jasa? Buka tokomu sekarang.</h2>
+            <p>
+              Gratis, cukup daftar pakai nomor WhatsApp. Kelola produk, catat pemasukan,
+              dan balas pesanan dari dashboard.
+            </p>
+          </div>
+          <a class="btn btn-lg" style="background:#fff;color:var(--primary-dark)" href="/daftar.html">
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#plus"></use></svg>
+            Daftar Penjual
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/beranda.js"></script>
+</body>
+</html>

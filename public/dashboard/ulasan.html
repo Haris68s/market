@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ulasan Produk &mdash; KantinSiswa</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/dashboard.css">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <div class="dash-layout">
+    <aside class="dash-side" id="dash-side"></aside>
+
+    <main class="dash-main">
+      <div class="dash-head">
+        <div>
+          <h1>Ulasan Pembeli</h1>
+          <p>Rating dan ulasan untuk produk tokomu.</p>
+        </div>
+      </div>
+
+      <div class="stat-grid" id="stat-grid"></div>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Daftar Ulasan</h2>
+          <span class="muted small" id="jumlah-ulasan"></span>
+        </div>
+        <div class="card-body" id="daftar-ulasan"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/dashboard-common.js"></script>
+  <script src="/assets/js/dashboard/ulasan.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Keuangan Toko &mdash; KantinSiswa</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/dashboard.css">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <div class="dash-layout">
+    <aside class="dash-side" id="dash-side"></aside>
+
+    <main class="dash-main">
+      <div class="dash-head">
+        <div>
+          <h1>Keuangan</h1>
+          <p>Catat pemasukan dan pengeluaran tokomu.</p>
+        </div>
+        <div class="dash-actions">
+          <button class="btn btn-outline" id="btn-ekspor">
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#download"></use></svg>
+            Ekspor CSV
+          </button>
+          <button class="btn btn-primary" id="btn-pemasukan">
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#trending-up"></use></svg>
+            Tambah Pemasukan
+          </button>
+          <button class="btn btn-danger" id="btn-pengeluaran">
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#trending-down"></use></svg>
+            Tambah Pengeluaran
+          </button>
+        </div>
+      </div>
+
+      <div class="stat-grid" id="stat-grid"></div>
+
+      <div class="alert alert-warning mb-4">
+        <svg class="icon icon-sm" aria-hidden="true"><use href="/assets/icons/sprite.svg#alert-triangle"></use></svg>
+        <span>
+          <strong>Selisih arus kas bukan berarti laba.</strong>
+          Nilainya hanya akurat bila semua modal dan biaya ikut dicatat.
+          Pesanan yang baru dibuat tidak otomatis menjadi pemasukan.
+        </span>
+      </div>
+
+      <div class="grid grid-2" style="align-items:start">
+        <section class="card">
+          <div class="card-head"><h2>Arus Kas</h2><span class="muted small">14 hari terakhir</span></div>
+          <div class="card-body">
+            <div class="chart-box chart-box-sm"><canvas id="chart-cashflow"></canvas></div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-head"><h2>Rincian per Kategori</h2></div>
+          <div class="card-body" id="kategori-ringkas"></div>
+        </section>
+      </div>
+
+      <section class="card mt-5">
+        <div class="card-head">
+          <h2>Riwayat Transaksi</h2>
+          <span class="muted small" id="jumlah-transaksi"></span>
+        </div>
+        <div class="card-body">
+          <div class="dash-toolbar">
+            <div class="field">
+              <label class="label" for="filter-jenis">Jenis</label>
+              <select class="select" id="filter-jenis">
+                <option value="all">Semua</option>
+                <option value="income">Pemasukan</option>
+                <option value="expense">Pengeluaran</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="label" for="filter-kategori">Kategori</label>
+              <select class="select" id="filter-kategori"><option value="all">Semua kategori</option></select>
+            </div>
+            <div class="field">
+              <label class="label" for="filter-dari">Dari tanggal</label>
+              <input class="input" type="date" id="filter-dari">
+            </div>
+            <div class="field">
+              <label class="label" for="filter-sampai">Sampai tanggal</label>
+              <input class="input" type="date" id="filter-sampai">
+            </div>
+          </div>
+
+          <div id="daftar-transaksi"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/dashboard-common.js"></script>
+  <script src="/assets/js/chart.js"></script>
+  <script src="/assets/js/dashboard/keuangan.js"></script>
+</body>
+</html>

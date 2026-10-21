@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ringkasan Toko &mdash; KantinSiswa</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/dashboard.css">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <div class="dash-layout">
+    <aside class="dash-side" id="dash-side"></aside>
+
+    <main class="dash-main">
+      <div class="dash-head">
+        <div>
+          <h1>Ringkasan Toko</h1>
+          <p>Pantau produk, pesanan, dan keuangan tokomu.</p>
+        </div>
+        <div class="dash-actions">
+          <select class="select" id="filter-periode" style="width:auto" aria-label="Pilih periode">
+            <option value="daily">Hari ini</option>
+            <option value="weekly">Minggu ini</option>
+            <option value="monthly" selected>Bulan ini</option>
+            <option value="all">Semua waktu</option>
+            <option value="custom">Rentang tanggal</option>
+          </select>
+          <div class="flex hidden" id="custom-range">
+            <input class="input" type="date" id="filter-from" aria-label="Dari tanggal">
+            <input class="input" type="date" id="filter-to" aria-label="Sampai tanggal">
+          </div>
+          <a class="btn btn-primary" href="/dashboard/produk.html">
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#plus"></use></svg>
+            Tambah Produk
+          </a>
+        </div>
+      </div>
+
+      <div class="stat-grid" id="stat-grid"></div>
+
+      <div class="grid grid-2" style="align-items:start">
+        <section class="card">
+          <div class="card-head"><h2>Arus Kas 14 Hari Terakhir</h2></div>
+          <div class="card-body">
+            <div class="chart-box"><canvas id="chart-cashflow"></canvas></div>
+            <p class="tiny muted mt-3 mb-0" id="cashflow-note"></p>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="card-head"><h2>Pesanan Terbaru</h2><a class="btn btn-ghost btn-sm" href="/dashboard/pesanan.html">Lihat semua</a></div>
+          <div class="card-body">
+            <div id="recent-orders"></div>
+          </div>
+        </section>
+      </div>
+
+      <section class="card mt-5">
+        <div class="card-head"><h2>Stok Menipis</h2></div>
+        <div class="card-body" id="low-stock"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/dashboard-common.js"></script>
+  <script src="/assets/js/chart.js"></script>
+  <script src="/assets/js/dashboard/ringkasan.js"></script>
+</body>
+</html>

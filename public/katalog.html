@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Katalog Produk &mdash; KantinSiswa</title>
+  <meta name="description" content="Cari dan filter produk marketplace KantinSiswa berdasarkan kategori dan rentang harga.">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/public.css">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main>
+    <section class="section" style="padding-bottom:0">
+      <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="/">Beranda</a>
+          <svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#chevron-right"></use></svg>
+          <span>Katalog</span>
+        </nav>
+
+        <div class="section-head" style="margin-bottom:0">
+          <div>
+            <h1>Katalog Produk</h1>
+            <p id="result-count">Memuat produk...</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top:var(--space-5)">
+      <div class="container catalog-layout">
+        <!-- Filter -->
+        <aside class="filter-sidebar" aria-label="Filter produk">
+          <div class="filter-group">
+            <h4>Kategori</h4>
+            <ul class="filter-list" id="filter-kategori">
+              <li><button type="button" class="active" data-category="">Semua kategori</button></li>
+            </ul>
+          </div>
+
+          <div class="filter-group">
+            <h4>Rentang harga</h4>
+            <div class="form-row" style="grid-template-columns:1fr 1fr;gap:var(--space-2)">
+              <div class="field">
+                <label class="label" for="filter-min">Min</label>
+                <input class="input" type="number" id="filter-min" min="0" step="1000" placeholder="0">
+              </div>
+              <div class="field">
+                <label class="label" for="filter-max">Maks</label>
+                <input class="input" type="number" id="filter-max" min="0" step="1000" placeholder="Tak terbatas">
+              </div>
+            </div>
+            <button class="btn btn-outline btn-sm btn-block" id="filter-harga-terapkan">Terapkan harga</button>
+          </div>
+
+          <div class="filter-group">
+            <h4>Urutkan</h4>
+            <ul class="filter-list" id="filter-sort">
+              <li><button type="button" class="active" data-sort="newest">Terbaru</button></li>
+              <li><button type="button" data-sort="price_asc">Harga terendah</button></li>
+              <li><button type="button" data-sort="price_desc">Harga tertinggi</button></li>
+              <li><button type="button" data-sort="popular">Terlaris</button></li>
+              <li><button type="button" data-sort="rating">Rating tertinggi</button></li>
+            </ul>
+          </div>
+
+          <div class="filter-group">
+            <button class="btn btn-ghost btn-sm btn-block" id="filter-reset">
+              <svg class="icon icon-sm" aria-hidden="true"><use href="/assets/icons/sprite.svg#refresh-cw"></use></svg>
+              Atur ulang filter
+            </button>
+          </div>
+        </aside>
+
+        <!-- Hasil -->
+        <div>
+          <div class="catalog-head">
+            <div class="active-filters" id="active-filters"></div>
+            <div class="muted small" id="result-meta"></div>
+          </div>
+
+          <div id="produk-grid"></div>
+          <div class="pagination" id="pagination"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/katalog.js"></script>
+</body>
+</html>

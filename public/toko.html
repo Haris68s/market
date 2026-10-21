@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profil Toko &mdash; KantinSiswa</title>
+  <meta name="description" content="Lihat profil toko, produk, dan ulasan dari penjual di KantinSiswa.">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/public.css">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <main class="section">
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb" id="breadcrumb">
+        <a href="/">Beranda</a>
+        <svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#chevron-right"></use></svg>
+        <span>Toko</span>
+      </nav>
+
+      <div id="toko-detail">
+        <div class="skeleton skeleton-box" style="height:180px;border-radius:var(--radius-lg)"></div>
+      </div>
+    </div>
+  </main>
+
+  <div id="app-footer"></div>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/toko.js"></script>
+</body>
+</html>

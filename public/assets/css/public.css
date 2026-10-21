@@ -1,0 +1,441 @@
+/* ==========================================================================
+   PUBLIC — beranda, katalog, detail produk, profil toko, auth
+   ========================================================================== */
+
+/* -------------------------------- Hero -------------------------------- */
+.hero {
+  background: linear-gradient(135deg, var(--primary-lighter) 0%, var(--primary-light) 55%, #ffffff 100%);
+  border-bottom: 1px solid var(--border);
+  padding: var(--space-7) 0;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  border: 1px solid var(--primary-light);
+  color: var(--primary-dark);
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: var(--space-4);
+}
+
+.hero h1 {
+  margin-bottom: var(--space-3);
+}
+
+.hero p.lead {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  max-width: 52ch;
+}
+
+.hero-actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-top: var(--space-5);
+}
+
+.hero-stats {
+  display: flex;
+  gap: var(--space-5);
+  margin-top: var(--space-6);
+  flex-wrap: wrap;
+}
+.hero-stat strong {
+  display: block;
+  font-size: 1.4rem;
+  color: var(--primary-dark);
+  line-height: 1.2;
+}
+.hero-stat span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.hero-visual {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.hero-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm);
+}
+.hero-card .hero-card-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  margin-bottom: var(--space-2);
+}
+.hero-card strong { display: block; font-size: 0.92rem; }
+.hero-card span { font-size: 0.8rem; color: var(--text-muted); }
+
+/* ------------------------------ CTA banner ---------------------------- */
+.cta-banner {
+  background: var(--primary-dark);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  flex-wrap: wrap;
+}
+.cta-banner h2 { color: #fff; margin-bottom: var(--space-2); }
+.cta-banner p { color: #dcfce7; margin: 0; max-width: 60ch; }
+
+/* ------------------------------- Katalog ------------------------------ */
+.catalog-layout {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.filter-sidebar {
+  position: sticky;
+  top: 82px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+}
+
+.filter-group + .filter-group {
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border);
+}
+
+.filter-group h4 {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.filter-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.filter-list li { margin-bottom: 2px; }
+.filter-list button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 7px 10px;
+  border: none;
+  background: transparent;
+  border-radius: var(--radius-sm);
+  font: inherit;
+  font-size: 0.9rem;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  transition: var(--transition);
+}
+.filter-list button:hover { background: var(--primary-lighter); }
+.filter-list button.active {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+.filter-list .count {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+.catalog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+
+.active-filters {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+.active-filter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.active-filter button {
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+.active-filter .icon { width: 14px; height: 14px; }
+
+/* ---------------------------- Detail produk --------------------------- */
+.product-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.gallery-main {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #f1f5f9;
+  border: 1px solid var(--border);
+  aspect-ratio: 4 / 3;
+}
+.gallery-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.gallery-thumbs {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  flex-wrap: wrap;
+}
+.gallery-thumbs button {
+  width: 74px;
+  height: 58px;
+  padding: 0;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #f1f5f9;
+  cursor: pointer;
+}
+.gallery-thumbs button.active { border-color: var(--primary); }
+.gallery-thumbs img { width: 100%; height: 100%; object-fit: cover; }
+
+.detail-price {
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  margin: var(--space-3) 0;
+}
+
+.store-inline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.qty-control {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+.qty-control button {
+  width: 40px;
+  height: 42px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--text);
+  display: grid;
+  place-items: center;
+}
+.qty-control button:hover { background: var(--primary-lighter); color: var(--primary-dark); }
+.qty-control input {
+  width: 58px;
+  height: 42px;
+  border: none;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  text-align: center;
+  font: inherit;
+  font-weight: 700;
+  padding: 0;
+}
+.qty-control input:focus { outline: none; }
+
+.review-item {
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--border);
+}
+.review-item:last-child { border-bottom: none; }
+.review-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.rating-bars { display: grid; gap: 6px; }
+.rating-bar {
+  display: grid;
+  grid-template-columns: 46px 1fr 36px;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+.rating-bar .bar {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+.rating-bar .bar span {
+  display: block;
+  height: 100%;
+  background: #f59e0b;
+  border-radius: var(--radius-full);
+}
+
+/* --------------------------- Profil toko ----------------------------- */
+.store-hero {
+  background: linear-gradient(135deg, var(--primary-lighter), var(--primary-light));
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+
+.store-profile-head {
+  display: flex;
+  gap: var(--space-4);
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.store-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid #bbf7d0;
+}
+.store-meta div span {
+  display: block;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+.store-meta div strong { font-size: 1.05rem; }
+
+/* ------------------------------- Auth page ---------------------------- */
+.auth-wrap {
+  display: grid;
+  place-items: center;
+  padding: var(--space-7) 0;
+  min-height: calc(100vh - 220px);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+  padding: var(--space-6);
+}
+
+.auth-card-wide { max-width: 720px; }
+
+.auth-head {
+  text-align: center;
+  margin-bottom: var(--space-5);
+}
+.auth-head .brand { justify-content: center; margin-bottom: var(--space-3); }
+.auth-head p { color: var(--text-muted); margin: 0; }
+
+.auth-footer {
+  text-align: center;
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.demo-hint {
+  background: var(--info-light);
+  border: 1px solid #bfdbfe;
+  color: #1e3a8a;
+  border-radius: var(--radius);
+  padding: var(--space-3);
+  font-size: 0.85rem;
+}
+
+/* --------------------------- Halaman 404/403 -------------------------- */
+.error-page {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: var(--space-8) var(--space-4);
+  min-height: 70vh;
+}
+.error-code {
+  font-size: 4.5rem;
+  font-weight: 800;
+  color: var(--primary-light);
+  line-height: 1;
+  margin-bottom: var(--space-2);
+}
+
+/* ------------------------------ Responsive ---------------------------- */
+@media (max-width: 900px) {
+  .hero-inner { grid-template-columns: 1fr; }
+  .catalog-layout { grid-template-columns: 1fr; }
+  .filter-sidebar { position: static; }
+  .product-detail { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .hero { padding: var(--space-6) 0; }
+  .hero-visual { grid-template-columns: 1fr; }
+  .hero-stats { gap: var(--space-4); }
+  .auth-card { padding: var(--space-4); }
+  .cta-banner { padding: var(--space-5) var(--space-4); }
+  .detail-price { font-size: 1.5rem; }
+}

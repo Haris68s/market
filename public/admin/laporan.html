@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Laporan &amp; Ulasan &mdash; Panel Admin</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/dashboard.css">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <div class="dash-layout">
+    <aside class="dash-side" id="dash-side"></aside>
+
+    <main class="dash-main">
+      <div class="dash-head">
+        <div>
+          <h1>Laporan &amp; Ulasan</h1>
+          <p>Tinjau laporan penyalahgunaan dan moderasi ulasan.</p>
+        </div>
+      </div>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Laporan Masuk</h2>
+          <div class="flex">
+            <select class="select" id="filter-status-laporan" style="width:auto">
+              <option value="all">Semua status</option>
+              <option value="open">Terbuka</option>
+              <option value="reviewed">Ditinjau</option>
+              <option value="resolved">Selesai</option>
+              <option value="rejected">Ditolak</option>
+            </select>
+          </div>
+        </div>
+        <div class="card-body" id="daftar-laporan"></div>
+      </section>
+
+      <section class="card mt-5">
+        <div class="card-head">
+          <h2>Daftar Ulasan</h2>
+          <div class="flex">
+            <select class="select" id="filter-status-ulasan" style="width:auto">
+              <option value="all">Semua status</option>
+              <option value="published">Tampil</option>
+              <option value="hidden">Disembunyikan</option>
+            </select>
+          </div>
+        </div>
+        <div class="card-body" id="daftar-ulasan"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/admin-common.js"></script>
+  <script src="/assets/js/admin/laporan.js"></script>
+</body>
+</html>

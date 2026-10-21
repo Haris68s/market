@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log Aktivitas &mdash; Panel Admin</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/dashboard.css">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <div class="dash-layout">
+    <aside class="dash-side" id="dash-side"></aside>
+
+    <main class="dash-main">
+      <div class="dash-head">
+        <div>
+          <h1>Log Aktivitas</h1>
+          <p>Jejak aktivitas penting di aplikasi. Password dan token tidak pernah dicatat di sini.</p>
+        </div>
+      </div>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Daftar Aktivitas</h2>
+          <span class="muted small" id="jumlah-log"></span>
+        </div>
+        <div class="card-body" id="daftar-log"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/admin-common.js"></script>
+  <script src="/assets/js/admin/log.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kategori Produk &mdash; Panel Admin</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/dashboard.css">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <div class="dash-layout">
+    <aside class="dash-side" id="dash-side"></aside>
+
+    <main class="dash-main">
+      <div class="dash-head">
+        <div>
+          <h1>Kategori Produk</h1>
+          <p>Tambah, ubah, dan nonaktifkan kategori yang dipakai di katalog.</p>
+        </div>
+        <div class="dash-actions">
+          <button class="btn btn-primary" id="btn-tambah-kategori">
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#plus"></use></svg>
+            Tambah Kategori
+          </button>
+        </div>
+      </div>
+
+      <section class="card">
+        <div class="card-head"><h2>Daftar Kategori</h2></div>
+        <div class="card-body" id="daftar-kategori"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/admin-common.js"></script>
+  <script src="/assets/js/admin/kategori.js"></script>
+</body>
+</html>

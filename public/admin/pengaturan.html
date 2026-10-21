@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pengaturan Marketplace &mdash; Panel Admin</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/dashboard.css">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <div class="dash-layout">
+    <aside class="dash-side" id="dash-side"></aside>
+
+    <main class="dash-main">
+      <div class="dash-head">
+        <div>
+          <h1>Pengaturan Marketplace</h1>
+          <p>Pengaturan umum yang dipakai seluruh halaman aplikasi.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-2" style="align-items:start">
+        <section class="card">
+          <div class="card-head"><h2>Identitas &amp; Konten</h2></div>
+          <div class="card-body">
+            <div id="pengaturan-error"></div>
+            <form id="form-pengaturan" novalidate>
+              <div class="field">
+                <label class="label" for="app-name">Nama aplikasi</label>
+                <input class="input" id="app-name" name="app.name">
+                <p class="hint">Nama ini tampil di seluruh halaman.</p>
+              </div>
+              <div class="field">
+                <label class="label" for="app-contact">Kontak bantuan</label>
+                <input class="input" id="app-contact" name="app.supportContact">
+              </div>
+              <div class="field">
+                <label class="label" for="app-hero-title">Judul hero (beranda)</label>
+                <input class="input" id="app-hero-title" name="app.heroTitle">
+              </div>
+              <div class="field">
+                <label class="label" for="app-hero-sub">Sub judul hero</label>
+                <textarea class="textarea" id="app-hero-sub" name="app.heroSubtitle"></textarea>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label class="label" for="min-reviews">Minimum ulasan untuk rating tertinggi</label>
+                  <input class="input" type="number" id="min-reviews" name="app.featuredMinReviews" min="0">
+                </div>
+                <div class="field">
+                  <label class="label" for="min-rating">Minimum rating untuk daftar unggulan</label>
+                  <input class="input" type="number" id="min-rating" name="app.featuredMinRating" min="0" max="5" step="0.1">
+                </div>
+              </div>
+              <div class="field">
+                <label class="checkbox">
+                  <input type="checkbox" id="allow-registration" name="app.allowRegistration">
+                  <span>Izinkan pendaftaran penjual baru</span>
+                </label>
+              </div>
+              <button class="btn btn-primary" type="submit" id="btn-simpan-pengaturan">Simpan pengaturan</button>
+            </form>
+          </div>
+        </section>
+
+        <div class="stack">
+          <section class="card">
+            <div class="card-head"><h2>Reset Password Pengguna</h2></div>
+            <div class="card-body">
+              <p class="muted small">
+                Karena login memakai nomor WhatsApp (bukan email), reset password dilakukan manual:
+                hubungi penjual lewat WhatsApp untuk verifikasi, lalu terbitkan kode reset di bawah.
+              </p>
+              <div class="field">
+                <label class="label" for="cari-pengguna">Cari pengguna</label>
+                <input class="input" type="search" id="cari-pengguna" placeholder="Nama atau nomor WhatsApp...">
+              </div>
+              <div id="hasil-cari"></div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-head"><h2>Informasi Sistem</h2></div>
+            <div class="card-body" id="info-sistem"></div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/admin-common.js"></script>
+  <script src="/assets/js/admin/pengaturan.js"></script>
+</body>
+</html>

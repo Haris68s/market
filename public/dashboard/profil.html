@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Profil Toko &mdash; KantinSiswa</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/dashboard.css">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <div class="dash-layout">
+    <aside class="dash-side" id="dash-side"></aside>
+
+    <main class="dash-main">
+      <div class="dash-head">
+        <div>
+          <h1>Profil Toko</h1>
+          <p>Atur informasi toko yang dilihat pembeli.</p>
+        </div>
+        <div class="dash-actions">
+          <a class="btn btn-outline" id="lihat-publik" target="_blank" rel="noopener">
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#external-link"></use></svg>
+            Lihat halaman publik
+          </a>
+        </div>
+      </div>
+
+      <div class="grid grid-2" style="align-items:start">
+        <section class="card">
+          <div class="card-head"><h2>Informasi Toko</h2></div>
+          <div class="card-body">
+            <div id="profil-error"></div>
+            <form id="form-profil" novalidate>
+              <div class="field">
+                <label class="label" for="name">Nama toko <span class="req">*</span></label>
+                <input class="input" id="name" name="name" required>
+                <p class="error-text" data-error-for="name"></p>
+              </div>
+
+              <div class="form-row">
+                <div class="field">
+                  <label class="label" for="category">Kategori utama</label>
+                  <select class="select" id="category" name="category"></select>
+                </div>
+                <div class="field">
+                  <label class="label" for="whatsapp">Nomor WhatsApp pembeli <span class="req">*</span></label>
+                  <input class="input" type="tel" id="whatsapp" name="whatsapp" required>
+                  <p class="error-text" data-error-for="whatsapp"></p>
+                  <p class="hint">Nomor ini yang dipakai tombol "Pesan via WhatsApp".</p>
+                </div>
+              </div>
+
+              <div class="field">
+                <label class="label" for="description">Deskripsi toko</label>
+                <textarea class="textarea" id="description" name="description" maxlength="1000"></textarea>
+              </div>
+
+              <hr style="border:none;border-top:1px solid var(--border);margin:var(--space-5) 0">
+
+              <h3>Lokasi</h3>
+              <div class="field">
+                <label class="label" for="city">Kota / area</label>
+                <input class="input" id="city" name="city" maxlength="100">
+              </div>
+              <div class="field">
+                <label class="label" for="address">Alamat lengkap</label>
+                <input class="input" id="address" name="address" maxlength="300">
+                <p class="hint">Alamat disimpan di database, tapi tidak ditampilkan publik kecuali kamu mencentang.</p>
+              </div>
+
+              <div class="field">
+                <label class="checkbox">
+                  <input type="checkbox" id="showAddress" name="showAddress">
+                  <span>Tampilkan kota/area di halaman publik</span>
+                </label>
+              </div>
+              <div class="field">
+                <label class="checkbox">
+                  <input type="checkbox" id="showExactAddress" name="showExactAddress">
+                  <span>Tampilkan alamat lengkap di halaman publik <strong>(hati-hati, alamatmu jadi terlihat oleh semua orang)</strong></span>
+                </label>
+              </div>
+
+              <button class="btn btn-primary" type="submit" id="btn-simpan-profil">Simpan perubahan</button>
+            </form>
+          </div>
+        </section>
+
+        <div class="stack">
+          <section class="card">
+            <div class="card-head"><h2>Rating Toko</h2></div>
+            <div class="card-body" id="rating-toko"></div>
+          </section>
+
+          <section class="card">
+            <div class="card-head"><h2>Keamanan Akun</h2></div>
+            <div class="card-body">
+              <p class="muted small">Ubah password akun yang dipakai untuk masuk.</p>
+              <form id="form-password" novalidate>
+                <div class="field">
+                  <label class="label" for="currentPassword">Password lama</label>
+                  <input class="input" type="password" id="currentPassword" name="currentPassword" required>
+                </div>
+                <div class="field">
+                  <label class="label" for="newPassword">Password baru</label>
+                  <input class="input" type="password" id="newPassword" name="newPassword" required>
+                </div>
+                <div class="field">
+                  <label class="label" for="newPasswordConfirm">Ulangi password baru</label>
+                  <input class="input" type="password" id="newPasswordConfirm" name="newPasswordConfirm" required>
+                </div>
+                <button class="btn btn-outline" type="submit">Ubah password</button>
+              </form>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/dashboard-common.js"></script>
+  <script src="/assets/js/dashboard/profil.js"></script>
+</body>
+</html>

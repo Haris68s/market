@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kelola Produk &mdash; KantinSiswa</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/css/base.css">
+  <link rel="stylesheet" href="/assets/css/components.css">
+  <link rel="stylesheet" href="/assets/css/dashboard.css">
+</head>
+<body>
+  <div id="app-header"></div>
+
+  <div class="dash-layout">
+    <aside class="dash-side" id="dash-side"></aside>
+
+    <main class="dash-main">
+      <div class="dash-head">
+        <div>
+          <h1>Kelola Produk</h1>
+          <p>Tambah, ubah, dan hapus produk tokomu.</p>
+        </div>
+        <div class="dash-actions">
+          <button class="btn btn-primary" id="btn-tambah">
+            <svg class="icon" aria-hidden="true"><use href="/assets/icons/sprite.svg#plus"></use></svg>
+            Tambah Produk
+          </button>
+        </div>
+      </div>
+
+      <div class="dash-toolbar">
+        <div class="field" style="flex:1 1 220px">
+          <label class="label" for="q">Cari produk</label>
+          <input class="input" type="search" id="q" placeholder="Nama produk...">
+        </div>
+        <div class="field">
+          <label class="label" for="filter-kategori">Kategori</label>
+          <select class="select" id="filter-kategori"><option value="">Semua kategori</option></select>
+        </div>
+        <div class="field">
+          <label class="label" for="filter-status">Status</label>
+          <select class="select" id="filter-status">
+            <option value="all">Semua status</option>
+            <option value="active">Aktif</option>
+            <option value="draft">Draft</option>
+            <option value="out_of_stock">Habis</option>
+            <option value="hidden">Disembunyikan</option>
+          </select>
+        </div>
+      </div>
+
+      <section class="card">
+        <div class="card-head">
+          <h2>Daftar Produk</h2>
+          <span class="muted small" id="jumlah-produk"></span>
+        </div>
+        <div class="card-body" id="daftar-produk"></div>
+      </section>
+
+      <section class="card mt-5">
+        <div class="card-head"><h2>Produk Terlaris</h2><span class="muted small">Berdasarkan pesanan selesai</span></div>
+        <div class="card-body" id="terlaris-produk"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/assets/js/api.js"></script>
+  <script src="/assets/js/ui.js"></script>
+  <script src="/assets/js/dashboard-common.js"></script>
+  <script src="/assets/js/dashboard/produk.js"></script>
+</body>
+</html>

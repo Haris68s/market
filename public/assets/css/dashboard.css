@@ -1,0 +1,193 @@
+/* ==========================================================================
+   DASHBOARD — layout dashboard penjual & super admin
+   ========================================================================== */
+
+.dash-layout {
+  display: grid;
+  grid-template-columns: 248px 1fr;
+  min-height: calc(100vh - 66px);
+}
+
+.dash-side {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: var(--space-5) var(--space-4);
+  position: sticky;
+  top: 66px;
+  align-self: start;
+  max-height: calc(100vh - 66px);
+  overflow-y: auto;
+}
+
+.dash-side-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+  margin-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+
+.dash-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.dash-nav li { margin-bottom: 3px; }
+
+.dash-nav a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 10px 12px;
+  border-radius: var(--radius);
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.92rem;
+  text-decoration: none;
+  transition: var(--transition);
+}
+.dash-nav a:hover {
+  background: var(--primary-lighter);
+  color: var(--primary-dark);
+  text-decoration: none;
+}
+.dash-nav a.active {
+  background: var(--primary-light);
+  color: var(--primary-dark);
+}
+.dash-nav .nav-label {
+  margin-left: auto;
+  background: var(--danger);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: var(--radius-full);
+}
+
+.dash-main {
+  padding: var(--space-5);
+  min-width: 0;
+}
+
+.dash-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+.dash-head h1 { margin-bottom: 4px; }
+.dash-head p { color: var(--text-muted); margin: 0; }
+
+.dash-actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* ------------------------------ Stat cards ---------------------------- */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.stat-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--primary-light);
+  color: var(--primary-dark);
+  flex: 0 0 auto;
+}
+.stat-icon.is-blue { background: var(--info-light); color: #1e40af; }
+.stat-icon.is-orange { background: var(--warning-light); color: #92400e; }
+.stat-icon.is-red { background: var(--danger-light); color: #991b1b; }
+.stat-icon.is-grey { background: #f3f4f6; color: var(--text-muted); }
+
+.stat-body { min-width: 0; }
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  display: block;
+}
+.stat-value {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.25;
+  display: block;
+  word-break: break-word;
+}
+.stat-hint {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+}
+
+/* ------------------------------ Charts -------------------------------- */
+.chart-box {
+  position: relative;
+  height: 260px;
+}
+.chart-box-sm { height: 200px; }
+
+/* ------------------------------ Toolbar ------------------------------- */
+.dash-toolbar {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-end;
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+.dash-toolbar .field { margin-bottom: 0; }
+
+/* ------------------------------- Modals -------------------------------- */
+.modal .qty-control input { width: 52px; }
+
+/* ---------------------------- Responsive ------------------------------ */
+@media (max-width: 900px) {
+  .dash-layout { grid-template-columns: 1fr; }
+
+  .dash-side {
+    position: static;
+    max-height: none;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: var(--space-4);
+  }
+
+  .dash-nav {
+    display: flex;
+    gap: var(--space-2);
+    overflow-x: auto;
+    padding-bottom: var(--space-2);
+  }
+  .dash-nav li { margin-bottom: 0; flex: 0 0 auto; }
+  .dash-nav a { white-space: nowrap; }
+  .dash-nav .nav-label { display: none; }
+
+  .dash-main { padding: var(--space-4) var(--space-3); }
+}
+
+@media (max-width: 640px) {
+  .stat-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+  .stat-value { font-size: 1.2rem; }
+  .dash-toolbar { flex-direction: column; align-items: stretch; }
+}
