@@ -220,6 +220,70 @@ beberapa pesanan selesai, dan ulasan. Password semua akun demo: `Siswa12345`.
 
 ---
 
+## Memindahkan Data dari MongoDB Lokal ke Atlas
+
+Kalau kamu sudah ng>data banyak di laptop (lokal) dan mau pindah ke MongoDB Atlas,
+pakai skrip migrasi yang sudah disiapkan. **Tidak perlu `mongodump`/`mongorestore`.**
+
+### Cara pakai
+
+```bash
+# 1. Isi MONGODB_URI di .env dengan connection string Atlas kamu.
+#    (JANGAN lupa ganti bagian passwordnya, bukan "<db_password>".)
+
+# 2. Lihat dulu rencana migrasi tanpa mengubah apa pun
+npm run migrate -- --dry-run
+
+# 3. Kalau sudah yakin, jalankan migrasinya
+npm run migrate
+```
+
+### Opsi yang tersedia
+
+| Opsi | Fungsi |
+|---|---|
+| `--dry-run` | Tampilkan daftar koleksi & jumlah dokumen, tanpa menyalin |
+| `--drop` | Kosongkan dulu koleksi di Atlas (berguna kalau mau mulai bersih) |
+| `--yes` / `-y` | Jangan tanya konfirmasi |
+| `--only=users,products` | Hanya salin koleksi tertentu |
+| `--skip=reviews` | Lewati koleksi tertentu |
+| `--source=<uri>` | URI sumber (default `mongodb://127.0.0.1:27017`) |
+| `--target=<uri>` | URI target (default dari `MONGODB_URI` di `.env`) |
+| `--source-db=<nama>` | Nama database sumber (default `kantinsiswa`) |
+| `--target-db=<nama>` | Nama database target (default dari `.env`) |
+
+Contoh migrate dari laptop ke Atlas sambil mengosongkan target dulu:
+```bash
+npm run migrate -- --drop --yes
+```
+
+### Yang dipindahkan & yang dilewati
+
+- Dipindahkan: **semua dokumen** dari semua koleksi + **semua index** (termasuk unique index
+  yang melindungi nomor WhatsApp & slug agar tetap berlaku sama seperti di lokal).
+- Dilewati: koleksi **`sessions`** (session lama tidak perlu dipindah; connect-mongo akan
+  membuat yang baru).
+- Password ikut tersalin dalam bentuk **hash** — jadi user tidak perlu daftar ulang.
+
+### Tips penting
+
+- **Stop aplikasi dulu** saat migrasi supaya tidak ada data yang masuk di tengah proses.
+- Connection string di layar **disamarkan** (`//user:********@host`), jadi aman kalau
+  difoto buat presentasi.
+- Kalau migrasi gagal di tengah, jalankan ulang dengan `--drop` untuk hasil yang bersih.
+- Setelah migrasi, jalankan `npm run create-admin` di server/Atlas untuk membuat akun
+  super admin (kalau belum ada).
+
+### Cara resmi lain (kalau mau pakai tool MongoDB)
+
+```bash
+# perlu instal Database Tools dulu
+mongodump --uri="mongodb://127.0.0.1:27017" --db=kantinsiswa --out=./backup
+mongorestore --uri="mongodb+srv://<user>:<password>@<cluster>.mongodb.net" --db=kantinsiswa ./backup/kantinsiswa
+```
+
+---
+
 ## Menjalankan Pengujian
 
 ```bash
