@@ -15,7 +15,8 @@
     "check-db": "node scripts/check-db.js",
     "setup": "npm run icons && npm run seed",
     "check-secrets": "node scripts/check-secrets.js",
-    "pretest": "node scripts/check-secrets.js"
+    "pretest": "node scripts/check-secrets.js",
+    "smoke": "node scripts/smoke-test.js"
   },
   "keywords": [
     "marketplace",

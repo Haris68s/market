@@ -14,8 +14,9 @@ const imageSchema = new mongoose.Schema(
     height: { type: Number, default: null },
     bytes: { type: Number, default: null },
     alt: { type: String, default: '' },
-  },
-  { _id: false }
+  }
+  // _id dibiarkan (default Mongoose) supaya setiap gambar punya ID sendiri
+  // dan bisa dihapus satu per satu dari dashboard.
 );
 
 const productSchema = new mongoose.Schema(

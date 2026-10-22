@@ -182,9 +182,12 @@ async function listStoreProducts(storeId, query = {}) {
  * Pastikan produk benar-benar milik toko yang sedang login.
  * Ini inti proteksi IDOR: identitas toko selalu berasal dari session,
  * bukan dari parameter request.
+ *
+ * PENTING: hasilnya dokumen Mongoose (BUKAN .lean()) supaya caller bisa
+ * memanggil .save() — misalnya saat menambah/menghapus gambar produk.
  */
 async function assertProductOwnership(productId, storeId) {
-  const product = await Product.findOne({ _id: toObjectId(productId), storeId: toObjectId(storeId) }).lean();
+  const product = await Product.findOne({ _id: toObjectId(productId), storeId: toObjectId(storeId) }).exec();
   if (!product) {
     throw AppError.notFound('Produk tidak ditemukan atau bukan milik toko Anda.');
   }

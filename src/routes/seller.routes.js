@@ -8,6 +8,7 @@ const router = express.Router();
 const asyncHandler = require('../utils/asyncHandler');
 const controller = require('../controllers/seller.controller');
 const orderController = require('../controllers/order.controller');
+const reviewController = require('../controllers/review.controller');
 const { validate } = require('../middleware/validate');
 const { requireAuth, requireSeller } = require('../middleware/auth');
 const { uploadLimiter } = require('../middleware/rateLimit');
@@ -82,7 +83,7 @@ router.delete('/transactions/:id', validate({ params: objectIdParam }), asyncHan
 
 /* Ringkasan & profil */
 router.get('/dashboard', validate({ query: periodQuerySchema }), asyncHandler(controller.dashboard));
-router.get('/reviews', asyncHandler(controller.listSellerReviews));
+router.get('/reviews', asyncHandler(reviewController.listSellerReviews));
 router.get('/profile', asyncHandler(controller.getProfile));
 router.patch('/profile', validate({ body: storeProfileSchema }), asyncHandler(controller.updateProfile));
 
