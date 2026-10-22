@@ -143,6 +143,15 @@ Skrip ini membandingkan nilai sensitif di `.env` dengan semua file yang ter-comm
 Kalau kamu punya MongoDB lokal yang datanya mau dipindah ke Atlas, pakai
 [skrip migrasi](#memindahkan-data-dari-mongodb-lokal-ke-atlas).
 
+### Kalau "gak bisa masuk ke super admin"
+
+1. Jalankan `npm run check-db` → lihat baris **"Akun super admin tersedia"**.
+2. Kalau tertulis "BELUM ada", berarti akunnya belum dibuat di database ini
+   (mis. dibuatnya di database lokal, lalu kamu pindah ke Atlas).
+3. Jalankan `npm run create-admin` (langkahnya di atas).
+4. Ingat: login memakai **nomor WhatsApp** (`081200000999`), bukan email.
+5. Kalau tetap gagal, pastikan status akunnya `active` (dicek juga oleh `check-db`).
+
 ### Kalau koneksi gagal
 
 `npm run check-db` memberi diagnosis yang spesifik:

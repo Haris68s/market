@@ -94,6 +94,25 @@ async function main() {
     beriKode(true, `Versi server MongoDB: ${info.version}`);
   }
 
+  // Cek apakah sudah ada akun super admin di database ini.
+  // Ini penyebab paling umum "gak bisa masuk ke super admin":
+  // akunnya dibuat di database lain (mis. lokal) lalu database-nya diganti.
+  try {
+    const admins = await db.collection('users').countDocuments({ role: 'superadmin' });
+    if (admins > 0) {
+      beriKode(true, `Akun super admin tersedia: ${admins}`);
+    } else {
+      beriKode(false, 'BELUM ada akun super admin di database ini.');
+      console.error('    Jalankan: npm run create-admin');
+      console.error('    (isi BOOTSTRAP_ADMIN_* di .env lebih dulu, lalu kosongkan lagi)\n');
+    }
+  } catch (err) {
+    console.error(`    (tidak bisa mengecek super admin: ${err.message})`);
+  }
+
+  const totalUser = await db.collection('users').countDocuments().catch(() => 0);
+  console.log(`\n  Total akun penjual di database ini: ${totalUser}`);
+
   console.log('\n  Semua siap. Jalankan: npm run seed (kalau database masih kosong)\n');
 
   await client.close();
