@@ -373,6 +373,21 @@ Isi cakupan tes (115 test):
 | `tests/security.test.js` | Akses admin, CSRF, sesi tidak aktif, rate limit, kebocoran hash |
 | `tests/frontend.test.js` | Semua halaman tersedia, meta viewport, ikon SVG, aset CSS/JS |
 | `tests/image.test.js` | Deteksi tipe file, batas ukuran, provider error |
+| `tests/migrate.test.js` | Logika migrasi data (dokumen, index unique, `--drop`) |
+| `tests/routes.test.js` | Semua handler route benar-benar fungsi yang ada |
+
+### Uji cepat semua endpoint (smoke test)
+
+Untuk memeriksa semua endpoint sekaligus terhadap server yang sedang berjalan:
+
+```bash
+npm start          # jalankan di terminal lain
+npm run smoke
+```
+
+Script ini login sebagai penjual & super admin, lalu memanggil **31 endpoint**
+(publik, seller, admin) dan menampilkan mana yang error. Berguna untuk menemukan
+route yang rusak setelah mengubah kode.
 
 Menjalankan satu berkas saja:
 
