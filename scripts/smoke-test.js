@@ -86,7 +86,7 @@ const BASE = process.env.BASE_URL || 'http://localhost:3000';
   // ---- Publik ----
   results.push(['GET  /api/health', await call('GET', '/api/health')]);
   results.push(['GET  /api/categories', await call('GET', '/api/categories')]);
-  results.push(['GET  /api/products', await call('GET', '/api/products')]);
+  results.push(['GET  /api/products', await call('GET', '/api/products?q=&category=&sort=newest&page=1&limit=12')]);
   results.push(['GET  /api/products/featured', await call('GET', '/api/products/featured')]);
   if (product) results.push([`GET  /api/products/:slug`, await call('GET', `/api/products/${product.slug}`)]);
   results.push(['GET  /api/stores', await call('GET', '/api/stores')]);
@@ -94,13 +94,16 @@ const BASE = process.env.BASE_URL || 'http://localhost:3000';
 
   // ---- Seller ----
   await login('081234567890', 'Siswa12345');
-  results.push(['GET  /api/seller/products', await call('GET', '/api/seller/products')]);
-  results.push(['GET  /api/seller/orders', await call('GET', '/api/seller/orders')]);
-  results.push(['GET  /api/seller/transactions', await call('GET', '/api/seller/transactions')]);
-  results.push(['GET  /api/seller/transactions/summary', await call('GET', '/api/seller/transactions/summary')]);
-  results.push(['GET  /api/seller/transactions/export', await call('GET', '/api/seller/transactions/export')]);
-  results.push(['GET  /api/seller/dashboard', await call('GET', '/api/seller/dashboard')]);
-  results.push(['GET  /api/seller/reviews', await call('GET', '/api/seller/reviews')]);
+  // PENTING: pakai parameter yang SAMA dengan yang dikirim frontend dashboard,
+  // supaya parameter yang tidak valid (mis. limit melebihi batas) ikut terdeteksi.
+  results.push(['GET  /api/seller/products', await call('GET', '/api/seller/products?q=&category=&status=all&limit=50')]);
+  results.push(['GET  /api/seller/products?filter', await call('GET', '/api/seller/products?q=kopi&category=makanan-minuman&status=active&sort=newest&page=1&limit=50')]);
+  results.push(['GET  /api/seller/orders', await call('GET', '/api/seller/orders?status=all&limit=50')]);
+  results.push(['GET  /api/seller/transactions', await call('GET', '/api/seller/transactions?type=all&category=all&limit=100')]);
+  results.push(['GET  /api/seller/transactions/summary', await call('GET', '/api/seller/transactions/summary?period=monthly')]);
+  results.push(['GET  /api/seller/transactions/export', await call('GET', '/api/seller/transactions/export?type=all&category=all&limit=100')]);
+  results.push(['GET  /api/seller/dashboard', await call('GET', '/api/seller/dashboard?period=monthly')]);
+  results.push(['GET  /api/seller/reviews', await call('GET', '/api/seller/reviews?page=1')]);
   results.push(['GET  /api/seller/profile', await call('GET', '/api/seller/profile')]);
   if (product) {
     results.push([`GET  /api/seller/products/:id`, await call('GET', `/api/seller/products/${product._id}`)]);
@@ -115,14 +118,14 @@ const BASE = process.env.BASE_URL || 'http://localhost:3000';
   // ---- Admin ----
   await login('081200000999', 'Admin12345');
   results.push(['GET  /api/admin/overview', await call('GET', '/api/admin/overview')]);
-  results.push(['GET  /api/admin/users', await call('GET', '/api/admin/users')]);
-  results.push(['GET  /api/admin/stores', await call('GET', '/api/admin/stores')]);
-  results.push(['GET  /api/admin/products', await call('GET', '/api/admin/products')]);
+  results.push(['GET  /api/admin/users', await call('GET', '/api/admin/users?q=&role=all&status=all&limit=50')]);
+  results.push(['GET  /api/admin/stores', await call('GET', '/api/admin/stores?q=&role=all&status=all&limit=50')]);
+  results.push(['GET  /api/admin/products', await call('GET', '/api/admin/products?q=&status=all&limit=50')]);
   results.push(['GET  /api/admin/categories', await call('GET', '/api/admin/categories')]);
-  results.push(['GET  /api/admin/reviews', await call('GET', '/api/admin/reviews')]);
-  results.push(['GET  /api/admin/reports', await call('GET', '/api/admin/reports')]);
-  results.push(['GET  /api/admin/orders', await call('GET', '/api/admin/orders')]);
-  results.push(['GET  /api/admin/logs', await call('GET', '/api/admin/logs')]);
+  results.push(['GET  /api/admin/reviews', await call('GET', '/api/admin/reviews?status=all&limit=50')]);
+  results.push(['GET  /api/admin/reports', await call('GET', '/api/admin/reports?status=all&limit=50')]);
+  results.push(['GET  /api/admin/orders', await call('GET', '/api/admin/orders?status=all&limit=50')]);
+  results.push(['GET  /api/admin/logs', await call('GET', '/api/admin/logs?status=all&limit=50')]);
   results.push(['GET  /api/admin/settings', await call('GET', '/api/admin/settings')]);
   if (seller) results.push([`GET  /api/admin/users/:id`, await call('GET', `/api/admin/users/${seller._id}`)]);
   if (product) results.push([`PATCH /api/admin/products/:id/status`, await call('PATCH', `/api/admin/products/${product._id}/status`, { status: 'active', reason: 'cek route saja' })]);

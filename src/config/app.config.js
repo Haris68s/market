@@ -38,7 +38,9 @@ module.exports = {
 
   pagination: {
     defaultLimit: 12,
-    maxLimit: 48,
+    // Batas atas jumlah item per halaman. Harus >= batas atas di skema validasi
+    // (src/validators/common.validator.js) supaya request dashboard tidak ditolak.
+    maxLimit: 100,
   },
 
   reviews: {

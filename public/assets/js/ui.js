@@ -339,7 +339,7 @@
       '</a>' +
       '<form class="navbar-search" id="nav-search" role="search">' +
       icon('search', 'icon-sm') +
-      '<input class="input" type="search" id="nav-search-input" name="q" placeholder="Cari produk..." aria-label="Cari produk">' +
+      '<input class="input" type="search" id="nav-search-input" name="q" placeholder="Cari produk..." aria-label="Cari produk" maxlength="120">' +
       '</form>' +
       '<nav class="nav-menu" id="nav-menu">' + menu + '</nav>' +
       '<div class="navbar-actions">' + actions +

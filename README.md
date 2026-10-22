@@ -375,6 +375,7 @@ Isi cakupan tes (115 test):
 | `tests/image.test.js` | Deteksi tipe file, batas ukuran, provider error |
 | `tests/migrate.test.js` | Logika migrasi data (dokumen, index unique, `--drop`) |
 | `tests/routes.test.js` | Semua handler route benar-benar fungsi yang ada |
+| `tests/params.test.js` | Parameter yang dikirim frontend diterima backend (regresi `limit`) |
 
 ### Uji cepat semua endpoint (smoke test)
 

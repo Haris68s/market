@@ -13,10 +13,16 @@ const objectIdParam = z.object({
     .regex(/^[a-f\d]{24}$/i, 'ID data tidak valid.'),
 });
 
-/** Parameter halaman. */
+/**
+ * Parameter halaman.
+ *
+ * Batas atas (max) dibuat longgar (100) supaya dashboard & admin yang
+ * meminta 50 item per halaman tetap bisa. Nilai di service tetap dijepit
+ * dengan appConfig.pagination.maxLimit sebagai pengaman kedua.
+ */
 const paginationQuery = {
   page: z.coerce.number().int().min(1).max(10000).default(1),
-  limit: z.coerce.number().int().min(1).max(48).default(12),
+  limit: z.coerce.number().int().min(1).max(100).default(12),
 };
 
 /** Nomor WhatsApp mentah (dinormalisasi di service). */
