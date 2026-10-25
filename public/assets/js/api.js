@@ -121,7 +121,7 @@
     storeToken: storeToken,
     /** Ambil token CSRF saat ini (dipakai untuk upload multipart/form-data). */
     getCsrfToken: function () {
-      return csrfToken || ensureCsrf();
+      return Promise.resolve(csrfToken || ensureCsrf());
     },
     ApiError: ApiError,
   };
